@@ -1,0 +1,6 @@
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\helloworld\helloworld\bin\Debug\helloworld.exe.config
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\helloworld\helloworld\bin\Debug\helloworld.exe
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\helloworld\helloworld\bin\Debug\helloworld.pdb
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\helloworld\helloworld\obj\Debug\helloworld.csprojResolveAssemblyReference.cache
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\helloworld\helloworld\obj\Debug\helloworld.exe
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\helloworld\helloworld\obj\Debug\helloworld.pdb
