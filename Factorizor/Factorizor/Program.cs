@@ -99,7 +99,7 @@ namespace Factorizor
             {
                 if (number % i == 0)
                 {
-                    if (i != 1 || i != number)
+                    if (i != 1 && i != number)
                     {
                         Console.WriteLine("{0} is not a prime number.", number);
                         return;

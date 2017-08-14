@@ -1,0 +1,13 @@
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Factorizor\Start\Factorizor\Factorizor\bin\Debug\Factorizor.exe.config
+C:\Users\rylkl\OneDrive\Main\Code\SG\Factorizor\Factorizor\bin\Debug\Factorizor.exe.config
+C:\Users\rylkl\OneDrive\Main\Code\SG\Factorizor\Factorizor\bin\Debug\Factorizor.exe
+C:\Users\rylkl\OneDrive\Main\Code\SG\Factorizor\Factorizor\bin\Debug\Factorizor.pdb
+C:\Users\rylkl\OneDrive\Main\Code\SG\Factorizor\Factorizor\obj\Debug\Factorizor.csprojResolveAssemblyReference.cache
+C:\Users\rylkl\OneDrive\Main\Code\SG\Factorizor\Factorizor\obj\Debug\Factorizor.exe
+C:\Users\rylkl\OneDrive\Main\Code\SG\Factorizor\Factorizor\obj\Debug\Factorizor.pdb
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\bin\Debug\Factorizor.exe.config
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\bin\Debug\Factorizor.exe
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\bin\Debug\Factorizor.pdb
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\obj\Debug\Factorizor.csprojResolveAssemblyReference.cache
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\obj\Debug\Factorizor.exe
+C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\obj\Debug\Factorizor.pdb
