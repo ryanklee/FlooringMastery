@@ -11,3 +11,9 @@ C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Fac
 C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\obj\Debug\Factorizor.csprojResolveAssemblyReference.cache
 C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\obj\Debug\Factorizor.exe
 C:\Users\rylkl\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\obj\Debug\Factorizor.pdb
+D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\bin\Debug\Factorizor.exe.config
+D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\bin\Debug\Factorizor.exe
+D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\bin\Debug\Factorizor.pdb
+D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\obj\Debug\Factorizor.csprojResolveAssemblyReference.cache
+D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\obj\Debug\Factorizor.exe
+D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Factorizor\Factorizor\obj\Debug\Factorizor.pdb

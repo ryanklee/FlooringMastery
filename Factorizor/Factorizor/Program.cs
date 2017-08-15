@@ -53,13 +53,13 @@ namespace Factorizor
         /// </summary>
         public static void PrintFactors(int number)
         {
-            Console.Write("The factors of {0} are: ", number);
+            Console.Write($"The factors of { number } are: ");
 
             for (int i = 1; i <= number; i++)
             {
                 if (number % i == 0)
                 {
-                    Console.Write("{0} ", i);
+                    Console.Write($"{ i } ");
                 }
             }
             Console.WriteLine();
@@ -82,11 +82,11 @@ namespace Factorizor
 
             if (sum == number)
             {
-                Console.WriteLine("{0} is a perfect number.", number);
+                Console.WriteLine($"{ number } is a perfect number.");
             }
             else
             {
-                Console.WriteLine("{0} is not a perfect number.", number);
+                Console.WriteLine($"{ number } is not a perfect number.");
             }
         }
 
@@ -101,12 +101,12 @@ namespace Factorizor
                 {
                     if (i != 1 && i != number)
                     {
-                        Console.WriteLine("{0} is not a prime number.", number);
+                        Console.WriteLine($"{ number } is not a prime number.");
                         return;
                     }
                 }
             }
-            Console.WriteLine("{0} is a prime number.", number);
+            Console.WriteLine($"{ number } is a prime number.");
         }
     }
 }
