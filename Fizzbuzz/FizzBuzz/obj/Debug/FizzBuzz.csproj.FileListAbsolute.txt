@@ -1,7 +1,0 @@
-D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\FizzBuzz\Start\FizzBuzz\bin\Debug\FizzBuzz.exe.config
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Fizzbuzz\FizzBuzz\bin\Debug\FizzBuzz.exe.config
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Fizzbuzz\FizzBuzz\bin\Debug\FizzBuzz.exe
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Fizzbuzz\FizzBuzz\bin\Debug\FizzBuzz.pdb
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Fizzbuzz\FizzBuzz\obj\Debug\FizzBuzz.csprojResolveAssemblyReference.cache
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Fizzbuzz\FizzBuzz\obj\Debug\FizzBuzz.exe
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\Fizzbuzz\FizzBuzz\obj\Debug\FizzBuzz.pdb

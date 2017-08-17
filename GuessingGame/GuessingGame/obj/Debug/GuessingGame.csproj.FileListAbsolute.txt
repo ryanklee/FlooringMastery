@@ -1,7 +1,0 @@
-D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\GuessingGame\Start\GuessingGame\bin\Debug\GuessingGame.exe.config
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\GuessingGame\GuessingGame\bin\Debug\GuessingGame.exe.config
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\GuessingGame\GuessingGame\bin\Debug\GuessingGame.exe
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\GuessingGame\GuessingGame\bin\Debug\GuessingGame.pdb
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\GuessingGame\GuessingGame\obj\Debug\GuessingGame.csprojResolveAssemblyReference.cache
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\GuessingGame\GuessingGame\obj\Debug\GuessingGame.exe
-D:\OneDrive\Main\Code\ryan-kleeberger-individual-work\GuessingGame\GuessingGame\obj\Debug\GuessingGame.pdb
