@@ -6,27 +6,33 @@ namespace Warmups.BLL
     {
         public bool AreWeInTrouble(bool aSmile, bool bSmile)
         {
-            throw new NotImplementedException();
+            if (aSmile == false && bSmile == false) return true;
+            else if (aSmile == true && bSmile == true) return true;
+            else return false;
         }
 
         public bool CanSleepIn(bool isWeekday, bool isVacation)
         {
-            throw new NotImplementedException();
+            if (isVacation == true || isWeekday == false) return true;
+            else return false;
         }
 
         public int SumDouble(int a, int b)
         {
-            throw new NotImplementedException();
+            if (a == b) return (a + b) * 2;
+            else return a + b;
         }
         
         public int Diff21(int n)
         {
-            throw new NotImplementedException();
+            if (n > 21) return (n - 21) * 2;
+            else return 21 - n;
         }
         
         public bool ParrotTrouble(bool isTalking, int hour)
         {
-            throw new NotImplementedException();
+            if (isTalking == true && hour < 7 || hour > 20) return true;
+            else return false;
         }
         
         public bool Makes10(int a, int b)

@@ -17,3 +17,13 @@ F:\Code\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.csprojResolveAssemblyRefer
 F:\Code\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.csproj.CoreCompileInputs.cache
 F:\Code\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.dll
 F:\Code\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.pdb
+F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\Warmups.Tests.dll
+F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\Warmups.Tests.pdb
+F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\nunit.framework.dll
+F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\Warmups.BLL.dll
+F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\Warmups.BLL.pdb
+F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\nunit.framework.xml
+F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.csprojResolveAssemblyReference.cache
+F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.csproj.CoreCompileInputs.cache
+F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.dll
+F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.pdb
