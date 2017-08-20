@@ -15,3 +15,9 @@ F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.BLL\obj\Debug\Warmups.BL
 F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.csproj.CoreCompileInputs.cache
 F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.dll
 F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.pdb
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.BLL\bin\Debug\Warmups.BLL.dll
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.BLL\bin\Debug\Warmups.BLL.pdb
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.csprojResolveAssemblyReference.cache
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.dll
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.pdb
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.csproj.CoreCompileInputs.cache

@@ -27,3 +27,13 @@ F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.
 F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.csproj.CoreCompileInputs.cache
 F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.dll
 F:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.pdb
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\Warmups.Tests.dll
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\Warmups.Tests.pdb
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\nunit.framework.dll
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\Warmups.BLL.dll
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\Warmups.BLL.pdb
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\bin\Debug\nunit.framework.xml
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.csprojResolveAssemblyReference.cache
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.dll
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.pdb
+C:\Code\ryan-kleeberger-individual-work\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.csproj.CoreCompileInputs.cache
