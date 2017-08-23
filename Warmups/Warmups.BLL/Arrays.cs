@@ -7,41 +7,77 @@ namespace Warmups.BLL
 
         public bool FirstLast6(int[] numbers)
         {
-            throw new NotImplementedException();
+            if (numbers[0] == 6 || numbers[numbers.Length - 1] == 6) return true;
+            else return false;
         }
 
         public bool SameFirstLast(int[] numbers)
         {
-            throw new NotImplementedException();
+            if (numbers.Length > 0 && numbers[0] == numbers[numbers.Length - 1]) return true;
+            else return false;
         }
         public int[] MakePi(int n)
         {
-            throw new NotImplementedException();
+            int[] pi = new int[n];
+
+            double piOG = Math.PI;
+
+            string stringPIWithDecimal = piOG.ToString();
+
+            string stringPIWithoutDecimal = stringPIWithDecimal.Substring(0, 1) + stringPIWithDecimal.Substring(2);
+            
+            for (int i = 0; i < n; i++)
+            {
+                pi[i] = Convert.ToInt32(stringPIWithoutDecimal.Substring(i, 1));
+            }
+            return pi;
+
         }
         
         public bool CommonEnd(int[] a, int[] b)
         {
-            throw new NotImplementedException();
+            if (a[0] == b[0] || a[a.Length - 1] == b[b.Length - 1]) return true;
+            else return false;
         }
         
         public int Sum(int[] numbers)
         {
-            throw new NotImplementedException();
+            int sum = 0;
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                sum += numbers[i];
+            }
+
+            return sum;
         }
         
         public int[] RotateLeft(int[] numbers)
         {
-            throw new NotImplementedException();
+            int[] rotatedNums = new int[] { numbers[1], numbers[2], numbers[0] };
+            return rotatedNums;
         }
         
         public int[] Reverse(int[] numbers)
         {
-            throw new NotImplementedException();
+            int[] reversedNums = new int[] { numbers[2], numbers[1], numbers[0] };
+            return reversedNums;
         }
         
         public int[] HigherWins(int[] numbers)
         {
-            throw new NotImplementedException();
+
+            int highestNumber = 0;
+
+            if (numbers[0] > numbers[numbers.Length - 1]) highestNumber = numbers[0];
+            else highestNumber = numbers[numbers.Length - 1];
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                numbers[i] = highestNumber;
+            }
+
+            return numbers;
         }
         
         public int[] GetMiddle(int[] a, int[] b)
