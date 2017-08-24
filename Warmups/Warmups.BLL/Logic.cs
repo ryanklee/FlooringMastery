@@ -46,20 +46,40 @@ namespace Warmups.BLL
             if (a + b >= 10 && a + b <= 19) return 20;
             else return a + b;
         }
-        
+
         public string AlarmClock(int day, bool vacation)
         {
-            throw new NotImplementedException();
+            if (vacation == false)
+            {
+                if (day == 6 || day == 0)
+                {
+                    return "10:00";
+                }
+                else return "7:00";
+            }
+            else
+            {
+                if (day == 6 || day == 0)
+                {
+                    return "10:00";
+                }
+                else return "off";
+                    
+            }
         }
         
         public bool LoveSix(int a, int b)
         {
-            throw new NotImplementedException();
+            if (a == 6 || b == 6 || Math.Abs(a - b) == 6 || Math.Abs(b - a) == 6 || a + b == 6)
+                return true;
+            else return false;
         }
         
         public bool InRange(int n, bool outsideMode)
         {
-            throw new NotImplementedException();
+            if (n >= 1 && n <= 10 && outsideMode == false) return true;
+            else if (n >= 1 && n >= 10 && outsideMode == true) return true;
+            else return false;
         }
         
         public bool SpecialEleven(int n)
