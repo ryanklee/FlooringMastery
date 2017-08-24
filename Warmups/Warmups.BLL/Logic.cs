@@ -11,27 +11,40 @@ namespace Warmups.BLL
 
         public bool GreatParty(int cigars, bool isWeekend)
         {
-            throw new NotImplementedException();
+            if (cigars >= 40 && cigars <= 60 && isWeekend == false) return true;
+            else if (cigars > 40 && isWeekend == true) return true;
+            else return false;
         }
         
         public int CanHazTable(int yourStyle, int dateStyle)
         {
-            throw new NotImplementedException();
+            if (yourStyle >= 8 || dateStyle >= 8) return 2;
+            else if (yourStyle <= 2 || dateStyle <= 2) return 0;
+            else return 1;
         }
 
         public bool PlayOutside(int temp, bool isSummer)
         {
-            throw new NotImplementedException();
+            if (temp >= 60 && temp <= 90 && isSummer == false) return true;
+            else if (temp >= 60 && temp <= 100 && isSummer == true) return true;
+            else return false;
         }
         
         public int CaughtSpeeding(int speed, bool isBirthday)
         {
-            throw new NotImplementedException();
+            int bdayBump = 0;
+
+            if (isBirthday == true) bdayBump = 5;
+
+            if (speed <= 60 + bdayBump) return 0;
+            else if (speed >= 61 + bdayBump && speed <= 80 + bdayBump) return 1;
+            else return 2;    
         }
         
         public int SkipSum(int a, int b)
         {
-            throw new NotImplementedException();
+            if (a + b >= 10 && a + b <= 19) return 20;
+            else return a + b;
         }
         
         public string AlarmClock(int day, bool vacation)
