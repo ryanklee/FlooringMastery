@@ -82,37 +82,85 @@ namespace Warmups.BLL
         
         public int[] GetMiddle(int[] a, int[] b)
         {
-            throw new NotImplementedException();
+            int[] middles = new int[] { a[1], b[1] };
+
+            return middles;
         }
         
         public bool HasEven(int[] numbers)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (numbers[i] % 2 == 0) return true;
+            }
+            return false;
         }
         
         public int[] KeepLast(int[] numbers)
         {
-            throw new NotImplementedException();
+            int[] doubled = new int[numbers.Length * 2];
+
+            doubled[doubled.Length - 1] = numbers[numbers.Length - 1];
+
+            return doubled;
         }
         
         public bool Double23(int[] numbers)
         {
-            throw new NotImplementedException();
+            int countTwos = 0;
+            int countThrees = 0;
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (numbers[i] == 2) countTwos += 1;
+                else if (numbers[i] == 3) countThrees += 1;
+            }
+
+            if (countTwos == 2 || countThrees == 2) return true;
+            else return false;
         }
         
         public int[] Fix23(int[] numbers)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                if (numbers[i] == 2 && numbers[i + 1] == 3) numbers[i + 1] = 0;
+            }
+            return numbers;
         }
         
         public bool Unlucky1(int[] numbers)
         {
-            throw new NotImplementedException();
+            int FirstPos = numbers[0];
+            int SecondPos = numbers[1];
+            int ThirdPos = numbers[2];
+            int PenultPos = numbers[numbers.Length - 2];
+            int LastPos = numbers[numbers.Length - 1];
+
+            if ((FirstPos == 1 && SecondPos == 3) ||
+                (SecondPos == 1 && ThirdPos == 3) ||
+                (PenultPos == 1 && LastPos == 3))
+            {
+                return true;
+            }
+            else return false;
+
+
         }
         
         public int[] Make2(int[] a, int[] b)
         {
-            throw new NotImplementedException();
+            int[] twoSlot = new int[2];
+
+            for (int i = 0; i < twoSlot.Length; i++)
+            {
+                if (i < a.Length)
+                {
+                    twoSlot[i] = a[i];
+                }
+                else twoSlot[i] = b[i - a.Length];
+            }
+            return twoSlot;
         }
 
     }
