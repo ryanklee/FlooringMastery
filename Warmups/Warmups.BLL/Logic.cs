@@ -84,47 +84,72 @@ namespace Warmups.BLL
         
         public bool SpecialEleven(int n)
         {
-            throw new NotImplementedException();
+            if (n % 11 == 0 || (n - 1) % 11 == 0) return true;
+            else return false;
         }
         
         public bool Mod20(int n)
         {
-            throw new NotImplementedException();
+            if ((n - 1) % 20 == 0 || (n - 2) % 20 == 0) return true;
+            else return false;
         }
         
         public bool Mod35(int n)
         {
-            throw new NotImplementedException();
+            if (n % 3 == 0 && n % 5 != 0) return true;
+            else if (n % 5 == 0 && n % 3 != 0) return true;
+            else return false;
         }
         
         public bool AnswerCell(bool isMorning, bool isMom, bool isAsleep)
         {
-            throw new NotImplementedException();
+            if (isMorning == true && isMom == true) return true;
+            else if (isAsleep == true) return false;
+            else if (isMorning == true) return false;
+            else return true;
         }
         
         public bool TwoIsOne(int a, int b, int c)
         {
-            throw new NotImplementedException();
+            if (a + b == c || b + c == a || c + a == b) return true;
+            else return false;
         }
         
         public bool AreInOrder(int a, int b, int c, bool bOk)
         {
-            throw new NotImplementedException();
+            if (a < b && b < c) return true;
+            else if (bOk == true && a < c) return true;
+            else return false;
         }
         
         public bool InOrderEqual(int a, int b, int c, bool equalOk)
         {
-            throw new NotImplementedException();
+            if (a < b && b < c) return true;
+            else if (equalOk == true && 
+                (a < b && b < c) || 
+                (a == b && b < c ) || 
+                (a < b && b == c))
+                return true;
+            else return false;
         }
         
         public bool LastDigit(int a, int b, int c)
         {
-            throw new NotImplementedException();
+            if (a % 10 == b % 10 ||
+                a % 10 == c % 10 ||
+                b % 10 == c % 10) return true;
+            else return false;
         }
         
         public int RollDice(int die1, int die2, bool noDoubles)
         {
-            throw new NotImplementedException();
+            if (noDoubles == true && die1 == die2)
+            {
+                if (die1 == 6) die1 = 1;
+                else die1++;
+                return die1 + die2;
+            }
+            else return die1 + die2;
         }
 
     }
