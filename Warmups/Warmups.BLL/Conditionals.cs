@@ -163,7 +163,15 @@ namespace Warmups.BLL
         
         public bool GotE(string str)
         {
-            throw new NotImplementedException();
+            int eCount = 0;
+
+            for (int i = 0; i <= str.Length - 1; i++)
+            {
+                if (str.Substring(i, 1) == "e") eCount++;
+            }
+
+            if (eCount >= 1 && eCount <= 3) return true;
+            else return false;
         }
         
         public string EndUp(string str)
@@ -178,7 +186,14 @@ namespace Warmups.BLL
         
         public string EveryNth(string str, int n)
         {
-            throw new NotImplementedException();
+            string newString = "";
+
+            for (int i = 0; i <= str.Length - 1; i++)
+            {
+                if (i % n == 0) newString = newString + str[i];
+            }
+
+            return newString;
         }
     }
 }

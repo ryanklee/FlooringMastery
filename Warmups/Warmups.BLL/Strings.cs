@@ -192,14 +192,17 @@ namespace Warmups.BLL
         public string TweakFront(string str)
         {
             if (str.Length == 0) return str;
+            else if (str.IndexOf("a") == 0 && str.IndexOf("b") == 1)
+            {
+                return str;
+            }
             else if (str.IndexOf("a") == 0)
             {
                 return "a" + str.Substring(2);
             }
             else if (str.IndexOf("b") == 1)
             {
-                return str.Substring(1);
-
+                return "b" + str.Substring(2);
             }
             else return str.Substring(2);
         }

@@ -60,7 +60,12 @@ namespace Warmups.BLL
         
         public int[] Reverse(int[] numbers)
         {
-            int[] reversedNums = new int[] { numbers[2], numbers[1], numbers[0] };
+            int[] reversedNums = new int[numbers.Length];
+
+            for (int i = 0; i <= numbers.Length - 1; i++)
+            {
+                reversedNums[i] = numbers[numbers.Length - 1 - i];
+            }
             return reversedNums;
         }
         
