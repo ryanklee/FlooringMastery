@@ -1,4 +1,5 @@
 ﻿using System;
+using Factorizor.BLL;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,14 @@ namespace BTFactorizor
 {
     class ConsoleOutput
     {
-                
+
+        public void Outputs(Number number)
+        {
+            OutputFactorsToConsole(number.NumberFromUser, number.Factors);
+            OutputIsPerfectToConsole(number.NumberFromUser, number.IsPerfect);
+            OutputIsPrimeToConsole(number.NumberFromUser, number.IsPrime);
+        }
+
         public void OutputFactorsToConsole(int numberFromUser, List<int> factors)
         {
             Console.Write("The factors of {0} are: ", numberFromUser);
@@ -41,9 +49,10 @@ namespace BTFactorizor
             }
         }
 
-        public void WaitForUserInput()
+        public void WaitForUserInputToQuit()
         {
-            Console.ReadLine();
+            Console.WriteLine("Press any key to quit program...");
+            Console.Read();
         }
     }
 }
