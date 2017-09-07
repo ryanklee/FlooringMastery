@@ -15,16 +15,17 @@ namespace BTFactorizor
             OutputFactorsToConsole(number.NumberFromUser, number.Factors);
             OutputIsPerfectToConsole(number.NumberFromUser, number.IsPerfect);
             OutputIsPrimeToConsole(number.NumberFromUser, number.IsPrime);
+            WaitForUserInputToQuit();
         }
 
-        public void OutputFactorsToConsole(int numberFromUser, List<int> factors)
+        private void OutputFactorsToConsole(int numberFromUser, List<int> factors)
         {
             Console.Write("The factors of {0} are: ", numberFromUser);
             factors.ForEach(i => Console.Write("{0} ", i));
             Console.WriteLine();
         }
 
-        public void OutputIsPerfectToConsole(int numberFromUser, bool isPerfect)
+        private void OutputIsPerfectToConsole(int numberFromUser, bool isPerfect)
         {
             if (isPerfect)
             {
@@ -37,7 +38,7 @@ namespace BTFactorizor
                 
         }
 
-        public void OutputIsPrimeToConsole(int numberFromUser, bool isPrime)
+        private void OutputIsPrimeToConsole(int numberFromUser, bool isPrime)
         {
             if (isPrime)
             {
@@ -49,7 +50,7 @@ namespace BTFactorizor
             }
         }
 
-        public void WaitForUserInputToQuit()
+        private void WaitForUserInputToQuit()
         {
             Console.WriteLine("Press any key to quit program...");
             Console.Read();

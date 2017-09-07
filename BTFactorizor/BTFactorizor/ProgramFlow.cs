@@ -20,13 +20,13 @@ namespace BTFactorizor
             OutputResults(number);
         }
 
-        public int GetNumberFromUser()
+        private int GetNumberFromUser()
         {
             ConsoleInput consoleInput = new ConsoleInput();
             return consoleInput.GetNumberFromUser();
         }
 
-        public void CalculateNeededOutputs(Number number)
+        private void CalculateNeededOutputs(Number number)
         {
             FactorFinder factorFinder = new FactorFinder();
             number.Factors = factorFinder.GenerateFactors(number.NumberFromUser);
@@ -38,11 +38,10 @@ namespace BTFactorizor
             number.IsPrime = primeChecker.IsPrime(number.Factors);
         }
 
-        public void OutputResults(Number number)
+        private void OutputResults(Number number)
         {
             ConsoleOutput consoleOutput = new ConsoleOutput();
             consoleOutput.Outputs(number);
-            consoleOutput.WaitForUserInputToQuit();
         }
     }
 }
