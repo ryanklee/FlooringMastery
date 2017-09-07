@@ -8,15 +8,21 @@ namespace Factorizor.BLL
 {
     public class FactorFinder
     {
-        private List<int> _factors = new List<int>();
+        private List<int> factors = new List<int>();
 
-        public void GetFactors(int number)
+        public void GenerateFactors(int number)
         {
-            for (int i = 0; i < number; i++)
+            for (int i = 1; i <= number; i++)
             {
                 if (number % i == 0)
-                    _factors.Add(i);
+                    factors.Add(i);
             }
         }
+
+        public List<int> ReturnFactors()
+        {
+            return factors;
+        }
     }
+
 }

@@ -10,6 +10,9 @@ namespace BTFactorizor
     {
         static void Main(string[] args)
         {
+            ProgramFlow programFlow = new ProgramFlow();
+
+            programFlow.StartProgram();
         }
     }
 }

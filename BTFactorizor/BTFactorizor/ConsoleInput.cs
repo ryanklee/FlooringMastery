@@ -6,27 +6,25 @@ using System.Threading.Tasks;
 
 namespace BTFactorizor
 {
-    class ConsoleInput
+    public class ConsoleInput
     {
-        public int NumberToFactorize { get; private set; }
 
-        private int GetNumber()
+        public int GetNumberFromUser()
         {
-            int number;
-
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("Enter integer to factorize: ");
                 string input = Console.ReadLine();
 
-                if (Int32.TryParse(input, out number))
-                    break;
+                if (Int32.TryParse(input, out int number))
+                    return number;
                 else
-                    Console.WriteLine("That was not an integer!");
+                {
+                    Console.WriteLine("That was not an integer! Press any key to continue...");
+                    Console.ReadKey();
+                }
             }
-
-            return number;
         }
-
     }
 }
