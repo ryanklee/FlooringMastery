@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FactorFinder.cs" />
+    <Compile Include="NumberFromUser.cs" />
     <Compile Include="PerfectChecker.cs" />
+    <Compile Include="PrimeChecker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

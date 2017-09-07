@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Factorizor.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,14 +8,13 @@ using System.Threading.Tasks;
 namespace BTFactorizor
 {
     public class ConsoleInput
-    {
-
+    {        
         public int GetNumberFromUser()
         {
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Enter integer to factorize: ");
+                Console.Write("Enter integer to factorize: ");
                 string input = Console.ReadLine();
 
                 if (Int32.TryParse(input, out int number))

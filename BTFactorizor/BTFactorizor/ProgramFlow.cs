@@ -9,23 +9,24 @@ namespace BTFactorizor
 {
     public class ProgramFlow
     {
-        List<int> factors;
-        public int NumberToFactorize { get; private set; }
-        public bool isPerfect;
-        
         public void StartProgram()
         {
-            FactorFinder factorFinder = new FactorFinder();
-            PerfectChecker perfectChecker = new PerfectChecker();
+            List<int> factors = new List<int>();
             ConsoleInput consoleInput = new ConsoleInput();
             ConsoleOutput consoleOutput = new ConsoleOutput();
+            FactorFinder factorFinder = new FactorFinder();
+            PerfectChecker perfectChecker = new PerfectChecker();
+            PrimeChecker primeChecker = new PrimeChecker();
+            NumberFromUser numberFromUser = new NumberFromUser();
 
-            NumberToFactorize = consoleInput.GetNumberFromUser();
-            factorFinder.GenerateFactors(NumberToFactorize);
-            factors = factorFinder.ReturnFactors();
-            isPerfect = perfectChecker.IsPerfect(NumberToFactorize, factors);
-            consoleOutput.OutputFactorsToConsole(NumberToFactorize, factors);
-            consoleOutput.OutputIsPerfectToConsole(NumberToFactorize, isPerfect);
+            numberFromUser.NumberToFactorize = consoleInput.GetNumberFromUser();
+            factors = numberFromUser.factors = factorFinder.GenerateFactors(numberFromUser.NumberToFactorize);
+            numberFromUser.isPerfect = perfectChecker.IsPerfect(numberFromUser.NumberToFactorize, numberFromUser.factors);
+            numberFromUser.isPrime = primeChecker.IsPrime(numberFromUser.factors);
+            consoleOutput.OutputFactorsToConsole(numberFromUser.NumberToFactorize, numberFromUser.factors);
+            consoleOutput.OutputIsPerfectToConsole(numberFromUser.NumberToFactorize, numberFromUser.isPerfect);
+            consoleOutput.OutputIsPrimeToConsole(numberFromUser.NumberToFactorize, numberFromUser.isPrime);
+            consoleOutput.WaitForUserInput();
         }
     }
 }
