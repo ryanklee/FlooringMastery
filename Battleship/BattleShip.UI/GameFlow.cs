@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace BattleShip.UI
 {
-    class Program
+    public class GameFlow
     {
-        static void Main(string[] args)
+        public void Setup()
         {
-            GameFlow gameFlow = new GameFlow();
-            gameFlow.Setup();
+            StartMenu startMenu = new StartMenu();
+            startMenu.Menu();
         }
     }
 }
