@@ -8,10 +8,9 @@ namespace BattleShip.UI
 {
     public class GameFlow
     {
-        public void Setup()
+        public GameFlow()
         {
-            StartMenu startMenu = new StartMenu();
-            startMenu.Menu();
+            GameSetup gameSetup = new GameSetup();
         }
     }
 }

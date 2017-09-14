@@ -11,7 +11,6 @@ namespace BattleShip.UI
         static void Main(string[] args)
         {
             GameFlow gameFlow = new GameFlow();
-            gameFlow.Setup();
         }
     }
 }
