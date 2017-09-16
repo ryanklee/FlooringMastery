@@ -10,7 +10,8 @@ namespace BattleShip.UI
     {
         static void Main(string[] args)
         {
-            GameFlow gameFlow = new GameFlow();
+            WorkFlow gameFlow = new WorkFlow();
+            gameFlow.StartGame();
         }
     }
 }

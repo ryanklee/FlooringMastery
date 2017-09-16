@@ -4,19 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BattleShip.UI
+namespace BattleShip.UI.GameSetup
 {
-    public class GameSetup
+    public class CreateGame
     {
-        public GameSetup()
+        public CreateGame()
         {
-            PlayerSetup playerSetup = new PlayerSetup();
-            Player p1 = new Player(playerSetup);
-            Player p2 = new Player(playerSetup);
+            SplashScreen splashScreen = new SplashScreen();
+            Coin coin = new Coin();
 
-            StartMenu startMenu = new StartMenu();
-            startMenu.Menu(p1, p2);
+            Player p1 = new Player(coin.FlipResult[0]);
+            Player p2 = new Player(coin.FlipResult[1]);
+            
+            EndGame();
+        }
 
+        private void EndGame()
+        {
+            Console.WriteLine("Press a key to continue...");
+            Console.ReadLine();
         }
     }
 }
