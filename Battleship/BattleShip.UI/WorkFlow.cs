@@ -14,7 +14,7 @@ namespace BattleShip.UI
             CreateGame createGame = new CreateGame();
             UserInput userInput = new UserInput();
 
-            userInput.GetUserCoordinate();
+            userInput.GetCoordinatesFromUser();
         }
     }
 }

@@ -9,7 +9,6 @@ namespace BattleShip.UI
 {
     public class UserInput
     {
-
         public string GetNameFromUser()
         {
             string nameInput;
@@ -18,11 +17,24 @@ namespace BattleShip.UI
             return nameInput;
         }
 
-        public string GetUserCoordinate()
+        public string GetCoordinatesFromUser()
         {
             string inputCoords;
-            Console.WriteLine("Enter coordinates: ");
-            inputCoords = Console.ReadLine();
+            while (true)
+            {
+                Console.WriteLine("Enter coordinates: ");
+                inputCoords = Console.ReadLine();
+                bool validForm = ValidateInputCoordForm(inputCoords);
+                string inputYCoord = inputCoords.Substring(1);
+                bool validType = ValidateInputCoordType(inputYCoord);
+
+                if (validForm == true && validType == true)
+                {
+                    break;
+                }
+                else
+                    InformUserOfInvalidInput();
+            }
             return inputCoords;
         }
 
@@ -33,17 +45,16 @@ namespace BattleShip.UI
 
         private bool ValidateInputCoordForm(string inputCoords)
         {
-            Regex rgx = new Regex(@"^[a-jA-J]\d0?$"); 
+            Regex rgx = new Regex(@"^[a-jA-J]\d0?$");
             return rgx.IsMatch(inputCoords);
         }
 
-        private int ValidateInputCoordType(string inputCoord)
+        private bool ValidateInputCoordType(string inputCoord)
         {
-            Int32.TryParse(inputCoord, out int inputCoordInt);
-            return inputCoordInt;
+            return Int32.TryParse(inputCoord, out int inputCoordInt);
         }
 
-        private int AplhaCoordinateToNumber(char alphaCoord)
+        private int AlphaCoordinateToNumber(char alphaCoord)
         {
             int numberCoord = char.ToUpper(alphaCoord) - 64;
             return numberCoord;
