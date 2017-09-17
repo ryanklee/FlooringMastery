@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ namespace BattleShip.UI
 {
     public class UserInput
     {
-        private string _alphaCoordinates = "abcdefghijABCDEFGHIJ";
 
         public string GetNameFromUser()
         {
@@ -23,75 +23,30 @@ namespace BattleShip.UI
             string inputCoords;
             Console.WriteLine("Enter coordinates: ");
             inputCoords = Console.ReadLine();
-            if (ValidateLength(inputCoords) == true)
-            {
-                string firstTerm = GetFirstTerm(inputCoords);
-                string secondTerm = GetSecondTerm(inputCoords);
-            }
-
-
             return inputCoords;
         }
 
-        private bool ValidateCoordinateInput(string inputCoords)
+        public void InformUserOfInvalidInput()
         {
-            //check length <= 3
-            //check first char is in _alphacoordinates
-            //check char[1,2] is an int
-            //check char[1,2] <= 10
-            //pass all condistions return true
-            //else return false
-
-            
-
-            
-            else 
-            else if (Int32.TryParse(secondCoordinateTerm, out int secondCoordinateTermParsed) == false)
-            {
-                Console.WriteLine("Input invalid.");
-                Console.ReadLine();
-                return false;
-            }
-            else if (secondCoordinateTermParsed > 10 || secondCoordinateTermParsed < 0)
-            {
-                Console.WriteLine("Input invalid.");
-                Console.ReadLine();
-                return false;
-            }
-            else
-            {
-                Console.WriteLine("Input valid.");
-                Console.ReadLine();
-                return true;
-            }
+            Console.WriteLine("Please enter valid coordinate...");
         }
 
-        private bool ValidateLength(string inputCoords)
+        private bool ValidateInputCoordForm(string inputCoords)
         {
-            if (inputCoords.Length != 2 || inputCoords.Length != 3)
-                return false;
-            else
-                return true;
+            Regex rgx = new Regex(@"^[a-jA-J]\d0?$"); 
+            return rgx.IsMatch(inputCoords);
         }
 
-        private string GetFirstTerm(string inputCoords)
+        private int ValidateInputCoordType(string inputCoord)
         {
-            return inputCoords.Substring(0, 1);
+            Int32.TryParse(inputCoord, out int inputCoordInt);
+            return inputCoordInt;
         }
 
-        private string GetSecondTerm(string inputCoords)
+        private int AplhaCoordinateToNumber(char alphaCoord)
         {
-            return inputCoords.Substring(2);
+            int numberCoord = char.ToUpper(alphaCoord) - 64;
+            return numberCoord;
         }
-
-        private bool ValidateInKey(string inputCoords)
-        {
-            if (_alphaCoordinates.Contains(inputCoords) == false)
-                return false;
-            else
-                return true;
-        }
-
-        private bool Validate
     }
 }
