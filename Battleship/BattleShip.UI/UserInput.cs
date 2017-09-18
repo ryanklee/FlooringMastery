@@ -9,36 +9,51 @@ namespace BattleShip.UI
 {
     public class UserInput
     {
+        public int x { get; private set; }
+        public int y { get; private set; }
+
         public string GetNameFromUser()
         {
-            string nameInput;
             Console.WriteLine("Enter player name: ");
-            nameInput = Console.ReadLine();
+            string nameInput = Console.ReadLine();
             return nameInput;
         }
 
-        public string GetCoordinatesFromUser()
+        public string GetCoordsFromUser()
         {
             string inputCoords;
+
             while (true)
             {
                 Console.WriteLine("Enter coordinates: ");
                 inputCoords = Console.ReadLine();
                 bool validForm = ValidateInputCoordForm(inputCoords);
-                string inputYCoord = inputCoords.Substring(1);
-                bool validType = ValidateInputCoordType(inputYCoord);
+                bool validType = ValidateInputCoordType(inputCoords.Substring(1));
 
-                if (validForm == true && validType == true)
+                if (validForm == true && 
+                    validType == true)
                 {
                     break;
                 }
                 else
+                {
                     InformUserOfInvalidInput();
+                    continue;
+                }
             }
             return inputCoords;
         }
 
-        public void InformUserOfInvalidInput()
+        private void CreateXYCoordsFromValidInput(string inputCoords)
+        {
+            char xString = inputCoords[0];
+            string yString = inputCoords.Substring(1);
+
+            x = AlphaCoordinateToNumber(xString);
+            Int32.TryParse(yString, out int y);
+        }
+
+        private void InformUserOfInvalidInput()
         {
             Console.WriteLine("Please enter valid coordinate...");
         }
