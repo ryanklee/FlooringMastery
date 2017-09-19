@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BattleShip.UI.GameSetup
+namespace BattleShip.UI
 {
     public class Player
     {
@@ -13,8 +13,8 @@ namespace BattleShip.UI.GameSetup
 
         public Player(int flipResult)
         {
-            UserInput userNameInput = new UserInput();
-            Name = userNameInput.GetNameFromUser();
+            UserInput userInput = new UserInput();
+            Name = userInput.GetNameFromUser();
             TurnOrderPosition = flipResult;
         }
     }

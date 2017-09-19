@@ -1,5 +1,5 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using BattleShip.BLL.Requests;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,70 +9,87 @@ namespace BattleShip.UI
 {
     public class UserInput
     {
-        public int x { get; private set; }
-        public int y { get; private set; }
+        public void SplashScreen()
+        {
+            Console.WriteLine("Welcome to Battleship!");
+            EnterToContinue();
+        }
 
         public string GetNameFromUser()
         {
             Console.WriteLine("Enter player name: ");
             string nameInput = Console.ReadLine();
+            EnterToContinue();
             return nameInput;
+        }
+
+        public Validation GetValidCoords()
+        {
+            Validation validation = new Validation();
+
+            string validStringCoords = GetCoordsFromUser();
+
+            validation.ConvertValidCoords(validStringCoords);
+
+            return validation;
         }
 
         public string GetCoordsFromUser()
         {
+            Validation validation = new Validation();
+
             string inputCoords;
 
             while (true)
             {
                 Console.WriteLine("Enter coordinates: ");
                 inputCoords = Console.ReadLine();
-                bool validForm = ValidateInputCoordForm(inputCoords);
-                bool validType = ValidateInputCoordType(inputCoords.Substring(1));
+                bool validForm = validation.CheckForm(inputCoords);
+                bool validType = validation.CheckType(inputCoords.Substring(1));
 
-                if (validForm == true && 
+                if (validForm == true &&
                     validType == true)
                 {
                     break;
                 }
                 else
                 {
-                    InformUserOfInvalidInput();
+                    validation.AlertInvalidInput();
                     continue;
                 }
             }
             return inputCoords;
         }
 
-        private void CreateXYCoordsFromValidInput(string inputCoords)
+        public ShipDirection GetDirectionFromUser()
         {
-            char xString = inputCoords[0];
-            string yString = inputCoords.Substring(1);
-
-            x = AlphaCoordinateToNumber(xString);
-            Int32.TryParse(yString, out int y);
+            Console.WriteLine("To choose direction, press arrow key: <Up>, <Down>, <Left>, <Right>");
+            while (true)
+            {
+                ConsoleKey keyPress = Console.ReadKey(true).Key;
+                switch (keyPress)
+                {
+                    case ConsoleKey.UpArrow:
+                        return ShipDirection.Up;
+                    case ConsoleKey.DownArrow:
+                        return ShipDirection.Down;
+                    case ConsoleKey.RightArrow:
+                        return ShipDirection.Right;
+                    case ConsoleKey.LeftArrow:
+                        return ShipDirection.Left;
+                    default:
+                        Console.WriteLine("Please enter valid direction...");
+                        EnterToContinue();
+                        break;
+                }
+            }
         }
 
-        private void InformUserOfInvalidInput()
+        public void EnterToContinue()
         {
-            Console.WriteLine("Please enter valid coordinate...");
-        }
-
-        private bool ValidateInputCoordForm(string inputCoords)
-        {
-            Regex rgx = new Regex(@"^[a-jA-J]\d0?$");
-            return rgx.IsMatch(inputCoords);
-        }
-
-        private bool ValidateInputCoordType(string inputCoord)
-        {
-            return Int32.TryParse(inputCoord, out int inputCoordInt);
-        }
-
-        private int AlphaCoordinateToNumber(char alphaCoord)
-        {
-            int numberCoord = char.ToUpper(alphaCoord) - 64;
-            return numberCoord;
+            Console.WriteLine("\nPress <enter> to continue..");
+            while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
+            Console.Clear();
         }
     }
 }

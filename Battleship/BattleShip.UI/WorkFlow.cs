@@ -1,4 +1,4 @@
-﻿using BattleShip.UI.GameSetup;
+﻿using BattleShip.BLL.GameLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +9,33 @@ namespace BattleShip.UI
 {
     public class WorkFlow
     {
-        public void StartGame()
-        {
-            CreateGame createGame = new CreateGame();
-            UserInput userInput = new UserInput();
+        public int PlayerTurn { get; private set; }
 
-            userInput.GetCoordsFromUser();
+        public void NewGame()
+        {
+            UserInput userInput = new UserInput();
+            userInput.SplashScreen();
+
+            Coin coin = new Coin();
+
+            Player p1 = new Player(coin.FlipResult[0]);
+            Player p2 = new Player(coin.FlipResult[1]);
+            
+            BoardSetup board = new BoardSetup();
+
+            Board p1Board = board.Setup();
+            Board p2Board = board.Setup();
+
+            EndGame();
+        }
+
+
+        private void EndGame()
+        {
+            Console.WriteLine("Press a key to continue...");
+            Console.ReadLine();
         }
     }
+
 }
+
