@@ -38,10 +38,5 @@ namespace BattleShip.UI
             int numberCoord = char.ToUpper(alphaCoord) - 64;
             return numberCoord;
         }
-
-        public void AlertInvalidInput()
-        {
-            Console.WriteLine("Please enter valid coordinate...");
-        }
     }
 }

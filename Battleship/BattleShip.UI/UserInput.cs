@@ -19,7 +19,7 @@ namespace BattleShip.UI
         {
             Console.WriteLine("Enter player name: ");
             string nameInput = Console.ReadLine();
-            EnterToContinue();
+            Console.Clear();
             return nameInput;
         }
 
@@ -34,7 +34,7 @@ namespace BattleShip.UI
             return validation;
         }
 
-        public string GetCoordsFromUser()
+        private string GetCoordsFromUser()
         {
             Validation validation = new Validation();
 
@@ -42,20 +42,16 @@ namespace BattleShip.UI
 
             while (true)
             {
-                Console.WriteLine("Enter coordinates: ");
                 inputCoords = Console.ReadLine();
-                bool validForm = validation.CheckForm(inputCoords);
-                bool validType = validation.CheckType(inputCoords.Substring(1));
-
-                if (validForm == true &&
-                    validType == true)
+                
+                if (validation.CheckForm(inputCoords) && 
+                    validation.CheckType(inputCoords.Substring(1)))
                 {
                     break;
                 }
                 else
                 {
-                    validation.AlertInvalidInput();
-                    continue;
+                    Console.WriteLine("Please enter valid coordinate..."); continue;
                 }
             }
             return inputCoords;
@@ -63,7 +59,6 @@ namespace BattleShip.UI
 
         public ShipDirection GetDirectionFromUser()
         {
-            Console.WriteLine("To choose direction, press arrow key: <Up>, <Down>, <Left>, <Right>");
             while (true)
             {
                 ConsoleKey keyPress = Console.ReadKey(true).Key;
@@ -79,7 +74,7 @@ namespace BattleShip.UI
                         return ShipDirection.Left;
                     default:
                         Console.WriteLine("Please enter valid direction...");
-                        EnterToContinue();
+                        Console.Clear();
                         break;
                 }
             }

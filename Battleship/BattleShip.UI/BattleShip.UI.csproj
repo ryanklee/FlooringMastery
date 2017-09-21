@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoardGrid.cs" />
     <Compile Include="BoardSetup.cs" />
     <Compile Include="Validation.cs" />
     <Compile Include="WorkFlow.cs" />

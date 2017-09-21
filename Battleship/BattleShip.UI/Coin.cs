@@ -10,12 +10,6 @@ namespace BattleShip.UI
     {
         public int[] FlipResult { get; private set; }
 
-        public Coin()
-        {
-            FlipResult = new int[2];
-            FlipCoin();
-        }
-
         public void FlipCoin()
         {
             Random rnd = new Random();
@@ -23,15 +17,12 @@ namespace BattleShip.UI
 
             if (result <= 0.5)
             {
-                FlipResult[0] = 0;
-                FlipResult[1] = 1;
+                FlipResult = new int[2] { 0, 1 };
             }
             else
             {
-                FlipResult[0] = 1;
-                FlipResult[1] = 0;
+                FlipResult = new int[2] { 1, 0 };
             }
         }
     }
-
 }
