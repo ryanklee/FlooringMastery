@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BattleShip.UI
 {
-    public class BoardSetup
+    public class PlayerBoard
     {
         public Board Setup(Player player)
         {
@@ -28,29 +28,29 @@ namespace BattleShip.UI
             {
                 while (true)
                 {
-                    Console.WriteLine("{0}, Enter coordinates to place your {1}", player.Name, ship);
-                    Validation validatedCoords = userInput.GetValidCoords();
-                    Console.Clear();
+                    Console.Write("{0}: Enter coordinates to place your {1}: ", player.Name, ship);
+                    Validator validatedCoords = userInput.GetValidCoords();
                     int x = validatedCoords.ValidX;
                     int y = validatedCoords.ValidY;
 
-                    Console.WriteLine("{0}, Choose direction <Up>, <Down>, <Left>, <Right>", player.Name);
+                    Console.Write("{0}: Choose direction <Up>, <Down>, <Left>, <Right>", player.Name);
                     ShipDirection direction = userInput.GetDirectionFromUser();
                     Console.Clear();
 
                     PlaceShipRequest request = new PlaceShipRequest()
                     {
-                        Coordinate = new Coordinate(x, y),
+                        Coordinate = new Coordinate(y, x),
                         Direction = direction,
                         ShipType = ship
                     };
 
-                    var response = board.PlaceShip(request);
+                    ShipPlacement response = board.PlaceShip(request);
 
                     if (response == ShipPlacement.Ok)
                     {
                         Console.WriteLine("Ship placement succeeded");
-                        userInput.EnterToContinue();
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     }
                     else

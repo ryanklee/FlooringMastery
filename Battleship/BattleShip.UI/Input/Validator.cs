@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BattleShip.UI
 {
-    public class Validation
+    public class Validator
     {
         public int ValidX { get; private set; }
         public int ValidY { get; private set; }
@@ -15,9 +15,9 @@ namespace BattleShip.UI
         public void ConvertValidCoords(string inputCoords)
         {
             char xString = inputCoords[0];
-            string yString = inputCoords.Substring(1);
-
             ValidX = AlphaCoordinateToNumber(xString);
+
+            string yString = inputCoords.Substring(1);
             Int32.TryParse(yString, out int y);
             ValidY = y;
         }

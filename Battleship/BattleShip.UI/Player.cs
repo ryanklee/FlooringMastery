@@ -9,13 +9,11 @@ namespace BattleShip.UI
     public class Player
     {
         public string Name { get; private set; }
-        public int TurnOrderPosition { get; private set; }
 
-        public Player(int flipResult)
+        public Player()
         {
             UserInput userInput = new UserInput();
             Name = userInput.GetNameFromUser();
-            TurnOrderPosition = flipResult;
         }
     }
 }

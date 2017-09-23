@@ -1,4 +1,5 @@
 ﻿using BattleShip.BLL.Requests;
+using BattleShip.BLL.Ships;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,23 +10,18 @@ namespace BattleShip.UI
 {
     public class UserInput
     {
-        public void SplashScreen()
-        {
-            Console.WriteLine("Welcome to Battleship!");
-            EnterToContinue();
-        }
-
+        
         public string GetNameFromUser()
         {
-            Console.WriteLine("Enter player name: ");
+            Console.Write("Enter player name: ");
             string nameInput = Console.ReadLine();
             Console.Clear();
             return nameInput;
         }
 
-        public Validation GetValidCoords()
+        public Validator GetValidCoords()
         {
-            Validation validation = new Validation();
+            Validator validation = new Validator();
 
             string validStringCoords = GetCoordsFromUser();
 
@@ -36,7 +32,7 @@ namespace BattleShip.UI
 
         private string GetCoordsFromUser()
         {
-            Validation validation = new Validation();
+            Validator validation = new Validator();
 
             string inputCoords;
 
@@ -51,7 +47,33 @@ namespace BattleShip.UI
                 }
                 else
                 {
-                    Console.WriteLine("Please enter valid coordinate..."); continue;
+                    Console.WriteLine("Please enter valid coordinate...");
+                    continue;
+                }
+            }
+            return inputCoords;
+        }
+
+        private string GetCoordsFromUser(Player player, ShipType ship)
+        {
+            Validator validation = new Validator();
+
+            string inputCoords;
+
+            while (true)
+            {
+                inputCoords = Console.ReadLine();
+
+                if (validation.CheckForm(inputCoords) &&
+                    validation.CheckType(inputCoords.Substring(1)))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter valid coordinate...");
+                    Console.WriteLine("Enter to continue...");
+                    continue;
                 }
             }
             return inputCoords;
@@ -73,18 +95,15 @@ namespace BattleShip.UI
                     case ConsoleKey.LeftArrow:
                         return ShipDirection.Left;
                     default:
+                        Console.Clear();
                         Console.WriteLine("Please enter valid direction...");
+                        Console.WriteLine("Enter to continue...");
+                        Console.ReadLine();
                         Console.Clear();
                         break;
+
                 }
             }
-        }
-
-        public void EnterToContinue()
-        {
-            Console.WriteLine("\nPress <enter> to continue..");
-            while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
-            Console.Clear();
         }
     }
 }

@@ -41,13 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoardGrid.cs" />
-    <Compile Include="BoardSetup.cs" />
-    <Compile Include="Validation.cs" />
+    <Compile Include="BoardSetup\Grid.cs" />
+    <Compile Include="BoardSetup\PlayerBoard.cs" />
+    <Compile Include="Input\Validator.cs" />
     <Compile Include="WorkFlow.cs" />
-    <Compile Include="Coin.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="UserInput.cs" />
+    <Compile Include="Input\UserInput.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
