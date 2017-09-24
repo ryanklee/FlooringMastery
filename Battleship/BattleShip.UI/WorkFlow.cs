@@ -12,8 +12,12 @@ namespace BattleShip.UI
 {
     public class WorkFlow
     {
+        public bool Victory { get; private set; }
+
         public void NewGame()
         {
+            while (true)
+            {
             Console.WriteLine("Welcome to Battleship!");
             Console.Write("Press enter to continue...");
             Console.ReadLine();
@@ -29,7 +33,7 @@ namespace BattleShip.UI
 
             int playerTurn = DetermineFirstPlayer();
 
-            while (true)
+            while (Victory != true)
             {
                 if (playerTurn % 2 == 0)
                 {
@@ -41,25 +45,67 @@ namespace BattleShip.UI
                 }
                 playerTurn++;
             }
-            EndGame();
+
+            if (EndGame() == true)
+                break;
+            else
+                continue;
+
+            }
         }
 
         private Board ProcessTurn(Board opponentBoard, Player player)
         {
-            UserInput userInput = new UserInput();
-            BoardGrid boardGrid = new BoardGrid();
+            while (true)
+            {
+                UserInput userInput = new UserInput();
+                BoardGrid boardGrid = new BoardGrid();
 
-            boardGrid.DisplayGridTurn(opponentBoard);
+                boardGrid.DisplayGridTurn(opponentBoard);
 
-            Validator validCoords = userInput.GetValidCoords();
-            Coordinate coordinate = new Coordinate(validCoords.ValidX, validCoords.ValidY);
+                Validator validCoords = userInput.GetValidCoords();
+                Coordinate coordinate = new Coordinate(validCoords.ValidX, validCoords.ValidY);
 
-            FireShotResponse response = opponentBoard.FireShot(coordinate);
-            Console.WriteLine("{0}", response.ShotStatus);
-            Console.WriteLine("Press enter to continue...");
-            Console.ReadLine();
-            Console.Clear();
-            return opponentBoard;
+                FireShotResponse response = opponentBoard.FireShot(coordinate);
+                if (ProcessShotStatusResponse(response) == true)
+                {
+                    Console.WriteLine("{0}", response.ShotStatus);
+                    Console.WriteLine("Press enter to continue...");
+                    Console.ReadLine();
+                    Console.Clear();
+                    return opponentBoard;
+                }
+                else
+                {
+                    Console.WriteLine("{0}", response.ShotStatus);
+                    Console.WriteLine("Press enter to continue...");
+                    Console.ReadLine();
+                    Console.Clear();
+                    continue;
+                }
+            }
+        }
+
+        private bool ProcessShotStatusResponse(FireShotResponse response)
+        {
+            switch (response.ShotStatus)
+            {
+                case ShotStatus.Invalid:
+                    return false;
+                case ShotStatus.Duplicate:
+                    return false;
+                case ShotStatus.Hit:
+                    return true;
+                case ShotStatus.HitAndSunk:
+                    return true;
+                case ShotStatus.Miss:
+                    return true;
+                case ShotStatus.Victory:
+                    Victory = true;
+                    return true;
+                default:
+                    return true;
+            }
         }
 
         private int DetermineFirstPlayer()
@@ -78,9 +124,24 @@ namespace BattleShip.UI
             }
         }
 
-        private void EndGame()
+        private bool EndGame()
         {
-            Console.WriteLine("Press a key to continue...");
+            Console.Clear();
+            Console.WriteLine("Press [enter] to play again or [esc] to quit... ");
+            ConsoleKey keyPress = Console.ReadKey(true).Key;
+            while (true)
+            {
+                switch (keyPress)
+                {
+                    case ConsoleKey.Enter:
+                        Victory = false;
+                        return false;
+                    case ConsoleKey.Escape:
+                        return true;
+                    default:
+                        continue;
+                }
+            }
             Console.ReadLine();
         }
     }

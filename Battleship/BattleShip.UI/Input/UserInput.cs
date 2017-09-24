@@ -38,6 +38,7 @@ namespace BattleShip.UI
 
             while (true)
             {
+                Console.Write("Enter coordinates: ");
                 inputCoords = Console.ReadLine();
                 
                 if (validation.CheckForm(inputCoords) && 
@@ -47,37 +48,14 @@ namespace BattleShip.UI
                 }
                 else
                 {
-                    Console.WriteLine("Please enter valid coordinate...");
+                    Console.WriteLine("Invalid coordinates. Please enter valid coordinate...");
+                    Console.Clear();
                     continue;
                 }
             }
             return inputCoords;
         }
 
-        private string GetCoordsFromUser(Player player, ShipType ship)
-        {
-            Validator validation = new Validator();
-
-            string inputCoords;
-
-            while (true)
-            {
-                inputCoords = Console.ReadLine();
-
-                if (validation.CheckForm(inputCoords) &&
-                    validation.CheckType(inputCoords.Substring(1)))
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Please enter valid coordinate...");
-                    Console.WriteLine("Enter to continue...");
-                    continue;
-                }
-            }
-            return inputCoords;
-        }
 
         public ShipDirection GetDirectionFromUser()
         {

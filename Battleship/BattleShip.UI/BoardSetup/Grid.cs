@@ -33,12 +33,12 @@ namespace BattleShip.UI
                         case ShotHistory.Miss:
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write(" M ");
-                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.ResetColor();
                             break;
                         case ShotHistory.Hit:
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write(" H ");
-                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.ResetColor();
                             break;
                         case ShotHistory.Unknown:
                             Console.Write(" . ");
