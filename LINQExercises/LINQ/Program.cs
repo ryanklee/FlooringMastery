@@ -7,11 +7,12 @@ namespace LINQ
 {
     class Program
     {
+
         static void Main()
         {
             //PrintAllProducts();
             //PrintAllCustomers();
-            Exercise2();
+            Exercise6();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -121,7 +122,7 @@ namespace LINQ
 
             foreach (var product in results)
             {
-                Console.WriteLine($"{product.ProductName} {product.UnitsInStock} {product.UnitPrice}");
+                Console.WriteLine($"{product.ProductName}");
             }
 
 
@@ -132,7 +133,22 @@ namespace LINQ
         /// </summary>
         static void Exercise3()
         {
+            List<Customer> customers = DataLoader.LoadCustomers();
 
+            var results = from customer in customers
+                          where customer.Region == "WA"
+                          select customer;
+
+            foreach (var customer in results)
+            {
+                Console.WriteLine($"{customer.CustomerID}");
+
+                foreach(var order in customer.Orders)
+                {
+                    Console.WriteLine($"{order.OrderID}\t\t{order.Total}\t\t{order.OrderDate}");
+                }
+                Console.WriteLine("");
+            }
         }
 
         /// <summary>
@@ -140,6 +156,18 @@ namespace LINQ
         /// </summary>
         static void Exercise4()
         {
+            List<Product> products = DataLoader.LoadProducts();
+
+            var results = from product in products
+                          select new
+                          {
+                              ProductName = product.ProductName
+                          };
+
+            foreach (var result in results)
+            {
+                Console.WriteLine($"{result.ProductName}");
+            }
 
         }
 
@@ -148,6 +176,25 @@ namespace LINQ
         /// </summary>
         static void Exercise5()
         {
+            List<Product> products = DataLoader.LoadProducts();
+
+            var results = from product in products
+                          select new
+                          {
+                              ProductName = product.ProductName,
+                              ProductId = product.ProductID,
+                              ProductCategory = product.Category,
+                              UnitsInStock = product.UnitsInStock,
+                              UnitPrice = Convert.ToDouble(product.UnitPrice) + (Convert.ToDouble(product.UnitPrice) * 0.25)
+                          };
+
+            foreach (var result in results)
+            {
+                Console.WriteLine("{0}\n{1}\t{2}\t{3}\t{4}\n",
+                    result.ProductName, result.ProductId, 
+                    result.ProductCategory, result.UnitsInStock, 
+                    result.UnitPrice);
+            }
 
         }
 
@@ -156,7 +203,19 @@ namespace LINQ
         /// </summary>
         static void Exercise6()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+            var results = from product in products
+                          select new
+                          {
+                              ProductName = product.ProductName.ToUpper(),
+                              Category = product.Category.ToUpper()
+                          };
+
+            foreach (var result in results)
+            {
+                Console.WriteLine($"{result.ProductName}........{result.Category}");
+            }
         }
 
         /// <summary>
