@@ -12,7 +12,7 @@ namespace LINQ
         {
             //PrintAllProducts();
             //PrintAllCustomers();
-            Exercise6();
+            Exercise7();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -143,7 +143,7 @@ namespace LINQ
             {
                 Console.WriteLine($"{customer.CustomerID}");
 
-                foreach(var order in customer.Orders)
+                foreach (var order in customer.Orders)
                 {
                     Console.WriteLine($"{order.OrderID}\t\t{order.Total}\t\t{order.OrderDate}");
                 }
@@ -191,8 +191,8 @@ namespace LINQ
             foreach (var result in results)
             {
                 Console.WriteLine("{0}\n{1}\t{2}\t{3}\t{4}\n",
-                    result.ProductName, result.ProductId, 
-                    result.ProductCategory, result.UnitsInStock, 
+                    result.ProductName, result.ProductId,
+                    result.ProductCategory, result.UnitsInStock,
                     result.UnitPrice);
             }
 
@@ -226,7 +226,43 @@ namespace LINQ
         /// </summary>
         static void Exercise7()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+
+            var resultsNoReorder = from product in products
+                                   where product.UnitsInStock >= 3
+                                   select new
+                                   {
+                                       ProductName = product.ProductName,
+                                       ProductId = product.ProductID,
+                                       ProductCategory = product.Category,
+                                       UnitsInStock = product.UnitsInStock,
+                                       UnitPrice = product.UnitPrice,
+                                       ReOrder = false
+                                   };
+
+            var resultsReorder = from product in products
+                                 where product.UnitsInStock < 3
+                                 select new
+                                 {
+                                     ProductName = product.ProductName,
+                                     ProductId = product.ProductID,
+                                     ProductCategory = product.Category,
+                                     UnitsInStock = product.UnitsInStock,
+                                     UnitPrice = product.UnitPrice,
+                                     ReOrder = true
+                                 };
+
+            var resultsCombined = resultsNoReorder.Union(resultsReorder);
+
+            foreach (var result in resultsCombined)
+            {
+                Console.WriteLine("{0}\n{1}\t{2}\t{3}\t{4}\t{5}\n",
+                    result.ProductName, result.ProductId,
+                    result.ProductCategory, result.UnitsInStock,
+                    result.UnitPrice, result.ReOrder);
+
+            }
         }
 
         /// <summary>
