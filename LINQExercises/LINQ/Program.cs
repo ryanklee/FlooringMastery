@@ -12,7 +12,7 @@ namespace LINQ
         {
             //PrintAllProducts();
             //PrintAllCustomers();
-            Exercise7();
+            Exercise15();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -271,6 +271,28 @@ namespace LINQ
         /// </summary>
         static void Exercise8()
         {
+            List<Product> products = DataLoader.LoadProducts();
+
+            var results = from product in products
+                          select new
+                          {
+                              ProductName = product.ProductName,
+                              ProductId = product.ProductID,
+                              ProductCategory = product.Category,
+                              UnitsInStock = product.UnitsInStock,
+                              UnitPrice = product.UnitPrice,
+                              StockValue = product.UnitPrice * product.UnitsInStock
+                          };
+
+            foreach (var result in results)
+            {
+                Console.WriteLine("{0}\n{1}\t{2}\t{3}\t{4}\t{5}\n",
+                    result.ProductName, result.ProductId,
+                    result.ProductCategory, result.UnitsInStock,
+                    result.UnitPrice, result.StockValue);
+
+            }
+
 
         }
 
@@ -279,6 +301,15 @@ namespace LINQ
         /// </summary>
         static void Exercise9()
         {
+            int[] numbersA = DataLoader.NumbersA;
+
+            foreach (int number in numbersA)
+            {
+                if (number % 2 == 0)
+                {
+                    Console.WriteLine(number);
+                }
+            }
 
         }
 
@@ -287,6 +318,22 @@ namespace LINQ
         /// </summary>
         static void Exercise10()
         {
+            List<Customer> customers = DataLoader.LoadCustomers();
+
+            var results = from customer in customers
+                          select customer;
+
+            foreach (var result in results)
+            {
+                foreach (var order in result.Orders)
+                {
+                    if (order.Total < 500)
+                    {
+                        Console.WriteLine($"{result.CompanyName}");
+                        break;
+                    }
+                }
+            }
 
         }
 
@@ -295,7 +342,22 @@ namespace LINQ
         /// </summary>
         static void Exercise11()
         {
+            int[] numbers = DataLoader.NumbersC;
 
+            int count = 0;
+
+            foreach (int number in numbers)
+            {
+                if (number % 2 != 0)
+                {
+                    if (count <= 2)
+                    {
+                        Console.WriteLine($"{number}");
+                        count++;
+                    }
+                    else break;
+                }
+            }
         }
 
         /// <summary>
@@ -303,7 +365,18 @@ namespace LINQ
         /// </summary>
         static void Exercise12()
         {
+            int[] numbers = DataLoader.NumbersB;
+            
+            int count = 0;
 
+            foreach (int number in numbers)
+            {
+                if (count > 2)
+                {
+                    Console.WriteLine($"{number}");
+                }
+                count++;
+            }
         }
 
         /// <summary>
@@ -311,6 +384,23 @@ namespace LINQ
         /// </summary>
         static void Exercise13()
         {
+            //assuming below that Orders are LIFO. 
+
+            List<Customer> customers = DataLoader.LoadCustomers();
+
+            var results = from customer in customers
+                          where customer.Orders.Length > 0
+                          select new
+                          {
+                              CustomerName = customer.CompanyName,
+                              MostRecentOrder = customer.Orders.Last().OrderID
+                          };
+
+            foreach (var result in results)
+            {
+                Console.WriteLine("{0}\t{1}", result.CustomerName, result.MostRecentOrder);
+            }
+
 
         }
 
@@ -319,6 +409,15 @@ namespace LINQ
         /// </summary>
         static void Exercise14()
         {
+            //req ambiguous on whether to print >= 6 num or not, assuming no
+
+            int[] numbers = DataLoader.NumbersC;
+
+            foreach (int number in numbers)
+            {
+                if (number >= 6) break;
+                else Console.WriteLine($"{number}");
+            }
 
         }
 
@@ -327,6 +426,24 @@ namespace LINQ
         /// </summary>
         static void Exercise15()
         {
+            int[] numbers = DataLoader.NumbersC;
+
+            bool trigger = false;
+
+            foreach (int number in numbers)
+            {
+                if (trigger == true)
+                {
+                    Console.WriteLine($"{number}");
+                }
+                else
+                {
+                    if (number % 3 == 0)
+                    {
+                        trigger = true;
+                    }
+                }
+            }
 
         }
 
