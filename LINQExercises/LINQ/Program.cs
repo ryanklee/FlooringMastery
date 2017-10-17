@@ -12,7 +12,7 @@ namespace LINQ
         {
             //PrintAllProducts();
             //PrintAllCustomers();
-            Exercise15();
+            Exercise20();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -452,7 +452,16 @@ namespace LINQ
         /// </summary>
         static void Exercise16()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+            var results = from product in products
+                          orderby product.ProductName
+                          select product;
+
+            foreach (var result in results)
+            {
+                Console.WriteLine($"{result.ProductName}");
+            }
         }
 
         /// <summary>
@@ -460,7 +469,16 @@ namespace LINQ
         /// </summary>
         static void Exercise17()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+            var results = from product in products
+                          orderby product.UnitsInStock descending
+                          select product;
+
+            foreach (var result in results)
+            {
+                Console.WriteLine($"{result.ProductName}");
+            }
         }
 
         /// <summary>
@@ -468,6 +486,21 @@ namespace LINQ
         /// </summary>
         static void Exercise18()
         {
+            List<Product> products = DataLoader.LoadProducts();
+
+            var results = from product in products
+                          orderby product.Category, product.UnitPrice descending
+                          group product by product.Category;
+
+            foreach (var group in results)
+            {
+                Console.WriteLine($"{group.Key}");
+
+                foreach (var product in group)
+                {
+                    Console.WriteLine($"\t{product.ProductName}");
+                }
+            }
 
         }
 
@@ -476,7 +509,16 @@ namespace LINQ
         /// </summary>
         static void Exercise19()
         {
+            int[] numbers = DataLoader.NumbersB;
 
+            var results = from number in numbers
+                          orderby number descending
+                          select number;
+
+            foreach (var number in results)
+            {
+                Console.WriteLine($"{number}");
+            }
         }
 
         /// <summary>
@@ -493,7 +535,22 @@ namespace LINQ
         /// </summary>
         static void Exercise20()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+            var results = from product in products
+                          group product by product.Category;
+
+            foreach (var group in results)
+            {
+                Console.WriteLine($"{group.Key}");
+
+                foreach (var product in group)
+                {
+                    Console.WriteLine($"{product.ProductName}");
+                }
+                Console.WriteLine("");
+
+            }
         }
 
         /// <summary>
