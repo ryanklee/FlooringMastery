@@ -12,7 +12,7 @@ namespace LINQ
         {
             //PrintAllProducts();
             //PrintAllCustomers();
-            Exercise20();
+            Exercise30();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -303,12 +303,11 @@ namespace LINQ
         {
             int[] numbersA = DataLoader.NumbersA;
 
-            foreach (int number in numbersA)
+            var onlyEvens = numbersA.Where(number => number % 2 == 0);
+
+            foreach (var even in onlyEvens)
             {
-                if (number % 2 == 0)
-                {
-                    Console.WriteLine(number);
-                }
+                Console.WriteLine(even);
             }
 
         }
@@ -344,19 +343,12 @@ namespace LINQ
         {
             int[] numbers = DataLoader.NumbersC;
 
-            int count = 0;
+            var onlyOdds = numbers.Where(number => number % 2 != 0).Take(3);
 
-            foreach (int number in numbers)
+
+            foreach (var oddNumber in onlyOdds)
             {
-                if (number % 2 != 0)
-                {
-                    if (count <= 2)
-                    {
-                        Console.WriteLine($"{number}");
-                        count++;
-                    }
-                    else break;
-                }
+                Console.WriteLine($"{oddNumber}");
             }
         }
 
@@ -366,16 +358,13 @@ namespace LINQ
         static void Exercise12()
         {
             int[] numbers = DataLoader.NumbersB;
-            
-            int count = 0;
 
-            foreach (int number in numbers)
+            var allButThree = numbers.Skip(3);
+
+
+            foreach (var number in allButThree)
             {
-                if (count > 2)
-                {
-                    Console.WriteLine($"{number}");
-                }
-                count++;
+                Console.WriteLine($"{number}");
             }
         }
 
@@ -409,14 +398,14 @@ namespace LINQ
         /// </summary>
         static void Exercise14()
         {
-            //req ambiguous on whether to print >= 6 num or not, assuming no
 
             int[] numbers = DataLoader.NumbersC;
 
-            foreach (int number in numbers)
+            var numbersUntil = numbers.TakeWhile(number => number < 6);
+
+            foreach (int number in numbersUntil)
             {
-                if (number >= 6) break;
-                else Console.WriteLine($"{number}");
+                Console.WriteLine($"{number}");
             }
 
         }
@@ -428,21 +417,11 @@ namespace LINQ
         {
             int[] numbers = DataLoader.NumbersC;
 
-            bool trigger = false;
+            var numbersAfter = numbers.SkipWhile(number => number % 3 != 0);
 
-            foreach (int number in numbers)
+            foreach (int number in numbersAfter)
             {
-                if (trigger == true)
-                {
-                    Console.WriteLine($"{number}");
-                }
-                else
-                {
-                    if (number % 3 == 0)
-                    {
-                        trigger = true;
-                    }
-                }
+                Console.WriteLine($"{number}");
             }
 
         }
@@ -566,7 +545,29 @@ namespace LINQ
         /// </summary>
         static void Exercise21()
         {
+            List<Customer> customers = DataLoader.LoadCustomers();
 
+            var results = from customer in customers
+                          group customer by customer.CompanyName into nameGroup
+                          from orderGroup in (from customer in nameGroup
+                                              from order in customer.Orders
+                                              group order by order.OrderDate.Year)
+                          group orderGroup by nameGroup.Key;
+
+            foreach (var companyName in results)
+            {
+                Console.WriteLine(companyName.Key);
+
+                foreach (var order in companyName)
+                {
+                    Console.WriteLine(order.Key);
+
+                    foreach (var orderDetail in order)
+                    {
+                        Console.WriteLine($"\t{orderDetail.OrderDate.Month} - ${orderDetail.Total}");
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -574,7 +575,15 @@ namespace LINQ
         /// </summary>
         static void Exercise22()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+            var results = from product in products
+                          group product by product.Category;
+
+            foreach (var group in results)
+            {
+                Console.WriteLine(group.Key);
+            }
         }
 
         /// <summary>
@@ -582,6 +591,11 @@ namespace LINQ
         /// </summary>
         static void Exercise23()
         {
+            List<Product> products = DataLoader.LoadProducts();
+
+            int id = 789;
+
+            var idExist = products.Exists(product => product.ProductID == id);
 
         }
 
@@ -590,7 +604,16 @@ namespace LINQ
         /// </summary>
         static void Exercise24()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+            var needStock = from product in products
+                            where product.UnitsInStock == 0
+                            select product.Category;
+
+            foreach (var category in needStock.Distinct())
+            {
+                Console.WriteLine(category);
+            }
         }
 
         /// <summary>
@@ -598,7 +621,19 @@ namespace LINQ
         /// </summary>
         static void Exercise25()
         {
+            //List<Product> products = DataLoader.LoadProducts();
 
+            //var allStocked = from product in products
+            //                 where product.UnitsInStock != 0
+            //                 select product.Category;
+
+
+
+
+            //foreach (var category in allStocked)
+            //{
+            //    Console.WriteLine(category.Category);
+            //}
         }
 
         /// <summary>
@@ -606,6 +641,11 @@ namespace LINQ
         /// </summary>
         static void Exercise26()
         {
+            int[] numbers = DataLoader.NumbersA;
+
+            var count = numbers.Where(number => number % 2 != 0).Count();
+
+            Console.WriteLine(count);
 
         }
 
@@ -614,7 +654,21 @@ namespace LINQ
         /// </summary>
         static void Exercise27()
         {
+            List<Customer> customers = DataLoader.LoadCustomers();
 
+
+
+            var results = from customer in customers
+                          select new
+                          {
+                              CustomerID = customer.CustomerID,
+                              OrderCount = customer.Orders.Count()
+                          };
+
+            foreach (var entry in results)
+            {
+                Console.WriteLine($"{entry.CustomerID}\t{entry.OrderCount}");
+            }
         }
 
         /// <summary>
@@ -622,7 +676,16 @@ namespace LINQ
         /// </summary>
         static void Exercise28()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+            var result = from product in products
+                         group product by product.Category;
+
+            foreach (var group in result)
+            {
+                Console.WriteLine(group.Key);
+                Console.WriteLine(group.Count());
+            }
         }
 
         /// <summary>
@@ -630,15 +693,40 @@ namespace LINQ
         /// </summary>
         static void Exercise29()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+            var result = from product in products
+                         group product by product.Category;
+
+            foreach (var group in result)
+            {
+                Console.WriteLine(group.Key);
+
+                var sum = products.Where(product => product.Category == group.Key).Sum(product => product.UnitsInStock);
+
+                Console.WriteLine(sum);
+            }
         }
+
 
         /// <summary>
         /// Print a distinct list of product categories and the lowest priced product in that category
         /// </summary>
         static void Exercise30()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+            var result = from product in products
+                         group product by product.Category;
+
+            foreach (var group in result)
+            {
+                Console.WriteLine(group.Key);
+
+                var lowestUnitPrice = products.Where(product => product.Category == group.Key).Min(product => product.UnitPrice);
+
+                Console.WriteLine(lowestUnitPrice);
+            }
         }
 
         /// <summary>
@@ -646,7 +734,15 @@ namespace LINQ
         /// </summary>
         static void Exercise31()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+            var result = (from product in products
+                         group product by product.Category into sortedProducts
+                         select new
+                         {
+                             CategoryName = sortedProducts.Key,
+                             Average = products.Where(product => product.Category == sortedProducts.Key).Average(product => product.UnitPrice)
+                         }).OrderByDescending(product => product.Average).Take(3);
         }
     }
 }
