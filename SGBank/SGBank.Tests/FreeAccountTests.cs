@@ -46,7 +46,7 @@ namespace SGBank.Tests
 
             AccountDepositResponse response = deposit.Deposit(account, amount);
 
-            Assert.AreEqual(response.Success, expectedResult);
+            Assert.AreEqual(expectedResult, response.Success);
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace SGBank.Tests
 
             AccountWithdrawResponse response = withdraw.Withdraw(account, amount);
 
-            Assert.AreEqual(response.Success, expectedResult);
+            Assert.AreEqual(expectedResult, response.Success);
         }
     }
 }
