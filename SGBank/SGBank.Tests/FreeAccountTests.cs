@@ -50,10 +50,11 @@ namespace SGBank.Tests
         }
 
         [Test]
-        [TestCase("12345", "Free Account", 100, AccountType.Free, 50, false)]
-        [TestCase("12345", "Free Account", 100, AccountType.Free, -200, false)]
-        [TestCase("12345", "Free Account", 100, AccountType.Basic, -50, false)]
-        [TestCase("12345", "Free Account", 100, AccountType.Free, -50, true)]
+        [TestCase("12345", "Free Account", 200, AccountType.Free, 100, false)]
+        [TestCase("12345", "Free Account", 200, AccountType.Free, -150, false)]
+        [TestCase("12345", "Free Account", 200, AccountType.Basic, -50, false)]
+        [TestCase("12345", "Free Account", 200, AccountType.Free, -250, false)]
+        [TestCase("12345", "Free Account", 200, AccountType.Free, -50, true)]
         public void FreeAccountWithdrawRuleTest(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount, bool expectedResult)
         {
             IWithdraw withdraw = new FreeAccountWithdrawRule();

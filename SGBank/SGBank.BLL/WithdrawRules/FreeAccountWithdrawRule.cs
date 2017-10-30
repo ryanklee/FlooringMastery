@@ -40,6 +40,8 @@ namespace SGBank.BLL.WithdrawRules
             {
                 response.Success = false;
                 response.Message = "Free accounts cannot overdraft!";
+                return response;
+
             }
 
             response.Success = true;
