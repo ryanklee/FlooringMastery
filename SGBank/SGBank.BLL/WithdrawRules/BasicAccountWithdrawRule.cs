@@ -18,7 +18,7 @@ namespace SGBank.BLL.WithdrawRules
             if (account.Type != AccountType.Basic)
             {
                 response.Success = false;
-                response.Message = "Withdrawal amounts must be negative!";
+                response.Message = "Error: a non-basic account hit the Basic Withdraw Rule. Contact IT";
                 return response;
             }
 
