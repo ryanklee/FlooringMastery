@@ -19,7 +19,7 @@ namespace SGBank.Data
         }
 
         
-        private static void TryAccountFile(string TestFilePath)
+        private void TryAccountFile()
         {
             try
             {
@@ -34,13 +34,12 @@ namespace SGBank.Data
             }
         }
 
-        private static string ReadEntry(string AccountNumber, string TestFilePath)
+        private string ReadEntry(string AccountNumber)
         {
-            string path = TestFilePath;
 
-            TryAccountFile(TestFilePath);
+            TryAccountFile();
 
-            string[] rows = File.ReadAllLines(path);
+            string[] rows = File.ReadAllLines(TestFilePath);
 
             for (int i = 1; i < rows.Length; i++)
             {
@@ -55,7 +54,7 @@ namespace SGBank.Data
             return null;
         }
 
-        private static Account ReadFileAccountData(string accountData)
+        private Account ReadFileAccountData(string accountData)
         {
             string[] accountFields = accountData.Split(',');
 
@@ -82,10 +81,41 @@ namespace SGBank.Data
             return account;
         }
 
+        private void WriteAccountData(Account account)
+        {
+            TryAccountFile();
+
+            string[] rows = File.ReadAllLines(TestFilePath);
+
+            for (int i = 1; i < rows.Length; i++)
+            {
+                string[] columns = rows[i].Split(',');
+
+                if (columns[0] == account.AccountNumber)
+                {
+                    columns[1] = account.Name;
+                    columns[2] = account.Balance.ToString();
+
+                    switch (account.Type)
+                    {
+                        case AccountType.Free:
+                            columns[3] = "F";
+                            break;
+                        case AccountType.Basic:
+                            columns[3] = "B";
+                            break;
+                        case AccountType.Premium:
+                            columns[3] = "P";
+                            break;
+                    }
+                }
+            }
+        }
+
         public Account LoadAccount(string AccountNumber)
         {
 
-            string accountData = ReadEntry(AccountNumber, TestFilePath);
+            string accountData = ReadEntry(AccountNumber);
 
             if (accountData != null)
             {
@@ -98,9 +128,7 @@ namespace SGBank.Data
 
         public void SaveAccount(Account account)
         {
-            // _account = account;
-
-            throw new NotImplementedException();
+            WriteAccountData(account);
         }
 
     }
