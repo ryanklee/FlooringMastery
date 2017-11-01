@@ -11,13 +11,19 @@ namespace SGBank.Data
 {
     public class FileAccountRepository : IAccountRepository
     {
-        List<Account> fileAccountData = ReadFileAccountData();
+        public string TestFilePath { get; set; }
+
+        public FileAccountRepository()
+        {
+            TestFilePath = @"C:\Users\rylkl\Code\ryan-kleeberger-individual-work\SGBank\SGBank.Data\Accounts.txt";
+        }
+
         
-        private static void TryAccountFile()
+        private static void TryAccountFile(string TestFilePath)
         {
             try
             {
-                using (StreamReader reader = new StreamReader("Accounts.txt"))
+                using (StreamReader reader = new StreamReader(TestFilePath))
                 {
                     reader.ReadToEnd();
                 }
@@ -28,11 +34,11 @@ namespace SGBank.Data
             }
         }
 
-        private static string FindEntry(string AccountNumber)
+        private static string ReadEntry(string AccountNumber, string TestFilePath)
         {
-            string path = @"Accounts.txt";
+            string path = TestFilePath;
 
-            TryAccountFile();
+            TryAccountFile(TestFilePath);
 
             string[] rows = File.ReadAllLines(path);
 
@@ -44,66 +50,57 @@ namespace SGBank.Data
                 {
                     return rows[i];
                 }
-                
+
             }
             return null;
         }
 
-        private static List<Account> ReadFileAccountData()
+        private static Account ReadFileAccountData(string accountData)
         {
-            string path = @"Accounts.txt";
+            string[] accountFields = accountData.Split(',');
 
-            TryAccountFile();
-
-            string[] rows = File.ReadAllLines(path);
-
-            List<Account> fileAccountData = new List<Account>();
-
-            for (int i = 1; i < rows.Length; i++)
+            Account account = new Account()
             {
-                string[] columns = rows[i].Split(',');
+                AccountNumber = accountFields[0],
+                Name = accountFields[1],
+                Balance = Decimal.Parse(accountFields[2])
+            };
 
-                fileAccountData[i].AccountNumber = columns[0];
-                fileAccountData[i].Name = columns[1];
-                fileAccountData[i].Balance = Decimal.Parse(columns[2]);
-
-                switch (columns[3])
-                {
-                    case "F":
-                        fileAccountData[i].Type = AccountType.Free;
-                        break;
-                    case "B":
-                        fileAccountData[i].Type = AccountType.Basic;
-                        break;
-                    case "P":
-                        fileAccountData[i].Type = AccountType.Premium;
-                        break;
-                }
+            switch (accountFields[3])
+            {
+                case "F":
+                    account.Type = AccountType.Free;
+                    break;
+                case "B":
+                    account.Type = AccountType.Basic;
+                    break;
+                case "P":
+                    account.Type = AccountType.Premium;
+                    break;
             }
 
-            return fileAccountData;
+            return account;
         }
-
-        //private static Account _account = new Account
-        //{
-        //    AccountNumber = "33333",
-        //    Name = "Basic Account",
-        //    Balance = 100M,
-        //    Type = AccountType.Basic
-        //};
 
         public Account LoadAccount(string AccountNumber)
         {
 
-                if (FindEntry(AccountNumber) != null)
-                    return _account;
-                else
-                    return null;
+            string accountData = ReadEntry(AccountNumber, TestFilePath);
+
+            if (accountData != null)
+            {
+                Account account = ReadFileAccountData(accountData);
+                return account;
+            }
+            else
+                return null;
         }
 
         public void SaveAccount(Account account)
         {
-            _account = account;
+            // _account = account;
+
+            throw new NotImplementedException();
         }
 
     }
