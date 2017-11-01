@@ -32,6 +32,7 @@ namespace SGBank.BLL.DepositRules
 
             response.Success = true;
             response.Amount = amount;
+            response.Account = account;
             response.OldBalance = account.Balance;
             account.Balance += amount;
             return response;

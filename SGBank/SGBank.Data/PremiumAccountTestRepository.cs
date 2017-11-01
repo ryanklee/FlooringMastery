@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace SGBank.Data
 {
-    public class BasicAccountTestRepository : IAccountRepository
+    public class PremiumAccountTestRepository : IAccountRepository
     {
         private static Account _account = new Account
         {
-            Name = "Basic Account",
-            Balance = 100M,
-            AccountNumber = "33333",
-            Type = AccountType.Basic
+            Name = "Premium Account",
+            Balance = 1000M,
+            AccountNumber = "99999",
+            Type = AccountType.Premium
         };
 
         public Account LoadAccount(string AccountNumber)

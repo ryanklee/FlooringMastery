@@ -19,7 +19,7 @@ namespace SGBank.BLL.WithdrawRules
                 case AccountType.Basic:
                     return new BasicAccountWithdrawRule();     
                 case AccountType.Premium:
-                    throw new NotImplementedException();
+                    return new PremiumAccountWithdrawRule();
                 default:
                     throw new NotImplementedException();
             }

@@ -76,7 +76,7 @@ namespace SGBank.BLL
             if (response.Account == null)
             {
                 response.Success = false;
-                response.Message = $"{ accountNumber} is not valid.";
+                response.Message = $"{accountNumber} is not valid.";
                 return response;
             }
 
