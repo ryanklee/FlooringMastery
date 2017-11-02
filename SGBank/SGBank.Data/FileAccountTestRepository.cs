@@ -9,16 +9,15 @@ using System.Threading.Tasks;
 
 namespace SGBank.Data
 {
-    public class FileAccountRepository : IAccountRepository
+    public class FileAccountTestRepository : IAccountRepository
     {
         public string TestFilePath { get; set; }
 
-        public FileAccountRepository()
+        public FileAccountTestRepository()
         {
             TestFilePath = @"C:\Users\rylkl\Code\ryan-kleeberger-individual-work\SGBank\SGBank.Data\Accounts.txt";
         }
 
-        
         private void TryAccountFile()
         {
             try
@@ -85,31 +84,25 @@ namespace SGBank.Data
         {
             TryAccountFile();
 
-            string[] rows = File.ReadAllLines(TestFilePath);
-
-            for (int i = 1; i < rows.Length; i++)
-            {
-                string[] columns = rows[i].Split(',');
-
-                if (columns[0] == account.AccountNumber)
+            List<string> accountEntries = new List<string>(File.ReadAllLines(TestFilePath));
+            List<string> newEntries = new List<string>();
+            
+                foreach (string entry in accountEntries)
                 {
-                    columns[1] = account.Name;
-                    columns[2] = account.Balance.ToString();
+                    string[] accountFields = entry.Split(',');
 
-                    switch (account.Type)
+                    if (accountFields[0] != account.AccountNumber)
                     {
-                        case AccountType.Free:
-                            columns[3] = "F";
-                            break;
-                        case AccountType.Basic:
-                            columns[3] = "B";
-                            break;
-                        case AccountType.Premium:
-                            columns[3] = "P";
-                            break;
+                        newEntries.Add(entry);
+                    }
+                    else
+                    {
+                        string updatedEntry = $"{accountFields[0]},{accountFields[1]},{account.Balance.ToString()},{accountFields[3]}";
+                        newEntries.Add(updatedEntry);
                     }
                 }
-            }
+
+            File.WriteAllLines(TestFilePath, newEntries);
         }
 
         public Account LoadAccount(string AccountNumber)
