@@ -1,4 +1,5 @@
-﻿using SGBank.BLL;
+﻿using Ninject;
+using SGBank.BLL;
 using SGBank.Models.Responses;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace SGBank.UI.Workflows
         public void Execute()
         {
             Console.Clear();
-            AccountManager accountManager = AccountManagerFactory.Create();
+
+            AccountManager manager = AccountDIContainer.Kernel.Get<AccountManager>();
 
             Console.Write("Enter an account number: ");
             string accountNumber = Console.ReadLine();
@@ -21,7 +23,7 @@ namespace SGBank.UI.Workflows
             Console.Write("Enter a withdraw amount: ");
             decimal amount = decimal.Parse(Console.ReadLine());
 
-            AccountWithdrawResponse response = accountManager.Withdraw(accountNumber, amount);
+            AccountWithdrawResponse response = manager.Withdraw(accountNumber, amount);
 
             if (response.Success)
             {

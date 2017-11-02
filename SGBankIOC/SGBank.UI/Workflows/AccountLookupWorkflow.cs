@@ -1,4 +1,5 @@
-﻿using SGBank.BLL;
+﻿using Ninject;
+using SGBank.BLL;
 using SGBank.Models.Responses;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace SGBank.UI.Workflows
     {
         public void Execute()
         {
-            AccountManager manager = AccountManagerFactory.Create();
+            AccountManager manager = AccountDIContainer.Kernel.Get<AccountManager>();
 
             Console.Clear();
             Console.WriteLine("Lookup an account");

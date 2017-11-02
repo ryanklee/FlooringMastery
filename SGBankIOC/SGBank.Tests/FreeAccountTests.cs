@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Ninject;
+using NUnit.Framework;
 using SGBank.BLL;
 using SGBank.BLL.DepositRules;
 using SGBank.BLL.WithdrawRules;
@@ -19,7 +20,7 @@ namespace SGBank.Tests
         [Test]
         public void CanLoadFreeAccountTestData()
         {
-            AccountManager manager = AccountManagerFactory.Create();
+            AccountManager manager = AccountDIContainer.Kernel.Get<AccountManager>();
 
             AccountLookupResponse response = manager.LookupAccount("12345");
 
