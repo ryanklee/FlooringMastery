@@ -15,7 +15,9 @@ namespace SGBank.Data
 
         public FileAccountTestRepository()
         {
-            TestFilePath = @"C:\Users\rylkl\Code\ryan-kleeberger-individual-work\SGBank\SGBank.Data\Accounts.txt";
+            DirectoryInfo info = new DirectoryInfo(".");
+
+            TestFilePath = @"..\..\..\SGBank.Data\\Accounts.txt";
         }
 
         private void TryAccountFile()
