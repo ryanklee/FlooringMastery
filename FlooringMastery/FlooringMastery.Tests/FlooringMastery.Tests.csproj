@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EC05A666-73AB-4776-BB1B-2A740F19E5E7}</ProjectGuid>
+    <ProjectGuid>{A3863357-49F5-477C-A979-7F54EB183C1A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FlooringMastery</RootNamespace>
-    <AssemblyName>FlooringMastery</AssemblyName>
+    <RootNamespace>FlooringMastery.Tests</RootNamespace>
+    <AssemblyName>FlooringMastery.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +56,10 @@
     <ProjectReference Include="..\FlooringMastery.BLL\FlooringMastery.BLL.csproj">
       <Project>{884b9ec5-7c24-4e31-9ebb-359d53aae079}</Project>
       <Name>FlooringMastery.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlooringMastery.Data\FlooringMastery.Data.csproj">
+      <Project>{314a0c87-0f74-4e42-95d9-b02f293563ca}</Project>
+      <Name>FlooringMastery.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\FlooringMastery.Models\FlooringMastery.Models.csproj">
       <Project>{870f38ae-20a0-49a7-88b4-b1a3772305cc}</Project>

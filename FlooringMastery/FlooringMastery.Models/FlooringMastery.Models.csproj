@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EC05A666-73AB-4776-BB1B-2A740F19E5E7}</ProjectGuid>
+    <ProjectGuid>{870F38AE-20A0-49A7-88B4-B1A3772305CC}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FlooringMastery</RootNamespace>
-    <AssemblyName>FlooringMastery</AssemblyName>
+    <RootNamespace>FlooringMastery.Models</RootNamespace>
+    <AssemblyName>FlooringMastery.Models</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,23 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FlooringMastery.BLL\FlooringMastery.BLL.csproj">
-      <Project>{884b9ec5-7c24-4e31-9ebb-359d53aae079}</Project>
-      <Name>FlooringMastery.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FlooringMastery.Models\FlooringMastery.Models.csproj">
-      <Project>{870f38ae-20a0-49a7-88b4-b1a3772305cc}</Project>
-      <Name>FlooringMastery.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
