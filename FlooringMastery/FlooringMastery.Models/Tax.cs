@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace FlooringMastery.Models
 {
-    class Program
+    public class Tax
     {
-        static void Main(string[] args)
-        {
-        }
+        public string StateAbbreviation { get; set; }
+        public string StateName { get; set; }
+        public decimal TaxRate { get; set; }
     }
 }

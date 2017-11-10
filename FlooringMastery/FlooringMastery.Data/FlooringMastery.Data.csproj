@@ -52,9 +52,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestData\Orders_06012013.txt" />
-    <Content Include="TestData\Products.txt" />
-    <Content Include="TestData\Taxes.txt" />
+    <Content Include="DataRepository\Orders_06012013.txt" />
+    <Content Include="DataRepository\Products.txt" />
+    <Content Include="DataRepository\Taxes.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlooringMastery.Models\FlooringMastery.Models.csproj">
