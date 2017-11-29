@@ -43,11 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\MockRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SampleDate\Orders_06012013.txt" />
+    <Content Include="SampleDate\Products.txt" />
+    <Content Include="SampleDate\Taxes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FM.Models\FM.Models.csproj">
+      <Project>{304A9C73-C1D2-434D-9141-7307D31B9027}</Project>
+      <Name>FM.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

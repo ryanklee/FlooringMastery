@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FM.Data
+namespace FM.Models.Batches
 {
-    public class Class1
+    public class TaxBatch
     {
+        public List<Tax> Taxes { get; set; }
     }
 }

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FM.BLL
+namespace FM.Models.Batches
 {
-    public class Class1
+    public class OrderBatch
     {
+        public List<Order> Orders { get; set; }
     }
 }

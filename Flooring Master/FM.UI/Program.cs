@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FM.UI.Workflows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace FM.UI
     {
         static void Main(string[] args)
         {
+            Menu.Start();
         }
     }
 }
