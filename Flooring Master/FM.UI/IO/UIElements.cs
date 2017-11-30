@@ -14,8 +14,8 @@ namespace FM.UI.IO
 
         public UIElements()
         {
-            BorderTop = "******************************";
-            BorderBottom = BorderTop;
+            BorderTop = "***********************************";
+            BorderBottom = BorderTop + "\n";
             RowPrefix = "* ";
         }
     }

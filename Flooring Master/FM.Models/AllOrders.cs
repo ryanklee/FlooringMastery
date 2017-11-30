@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlooringMastery.Models.Responses
+namespace FM.Models
 {
-    public class OrderLookupResponse : Response
+    public class AllOrders
     {
-        public Order Order { get; set; }
+        public Dictionary<string, List<Order>> AllOrderBatches { get; set; }
     }
 }

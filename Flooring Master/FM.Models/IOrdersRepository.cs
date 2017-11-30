@@ -1,5 +1,4 @@
-﻿using FM.Models.Batches;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +8,10 @@ namespace FM.Models
 {
     public interface IOrdersRepository
     {
-        OrderBatch LoadOrders(string orderDate);
+        void LoadAllOrders();
+        List<Order> LoadOrder(string orderDate);
+        Order AddOrder();
+        Order EditOrder();
+        Order SaveOrder();
     }
 }

@@ -43,9 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Batches\OrderBatch.cs" />
-    <Compile Include="Batches\ProductBatch.cs" />
-    <Compile Include="Batches\TaxBatch.cs" />
+    <Compile Include="AllOrders.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="IOrdersRepository.cs" />
     <Compile Include="Order.cs" />

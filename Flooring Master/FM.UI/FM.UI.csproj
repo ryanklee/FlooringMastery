@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="IO\ConsoleIO.cs" />
     <Compile Include="IO\UIElements.cs" />
+    <Compile Include="Workflows\AddOrder.cs" />
     <Compile Include="Workflows\DisplayOrder.cs" />
     <Compile Include="Workflows\Menu.cs" />
     <Compile Include="Program.cs" />

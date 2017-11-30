@@ -1,5 +1,4 @@
 ﻿using FM.Models;
-using FM.Models.Batches;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +10,19 @@ namespace FM.Data.Repositories
     public class MockRepository : IOrdersRepository
     {
 
-        private static OrderBatch _orderBatch = new OrderBatch
+        private static AllOrders _allOrders = new AllOrders()
         {
-            Orders = GetOrders()
+            AllOrderBatches = new Dictionary<string, List<Order>>()
         };
 
-        private static List<Order> GetOrders()
+        public void LoadAllOrders()
         {
-            List<Order> orders = new List<Order>();
+            AllOrders allOrders = new AllOrders();
 
+            allOrders.AllOrderBatches = new Dictionary<string, List<Order>>();
+
+            List<Order> orderBatch = new List<Order>();
+            string orderDate = "06012013";
             string orderEntry = "1,Wise,OH,6.25,Wood,100.00,5.15,4.75,515.00,475.00,61.88,1051.88";
             string[] orderFields = orderEntry.Split(',');
 
@@ -36,20 +39,37 @@ namespace FM.Data.Repositories
                 MaterialCost = Decimal.Parse(orderFields[8]),
                 LaborCost = Decimal.Parse(orderFields[9]),
                 Tax = Decimal.Parse(orderFields[10]),
-                Total = Decimal.Parse(orderFields[11]),
+                Total = Decimal.Parse(orderFields[11])
             };
 
-            orders.Add(order);
+            orderBatch.Add(order);
 
-            return orders;
+            allOrders.AllOrderBatches.Add(orderDate, orderBatch);
+
+            _allOrders = allOrders;
+
         }
 
-        public OrderBatch LoadOrders(string orderDate)
+        public List<Order> LoadOrder(string orderDate)
         {
-            if (orderDate != "06012013")
-                return null;
+            if (_allOrders.AllOrderBatches.ContainsKey(orderDate) == false) return null;
+            else return _allOrders.AllOrderBatches[orderDate];
 
-            return _orderBatch;
+        }
+
+        public Order AddOrder()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Order EditOrder()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Order SaveOrder()
+        {
+            throw new NotImplementedException();
         }
     }
 }

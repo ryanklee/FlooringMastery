@@ -1,6 +1,5 @@
 ﻿using FM.BLL;
 using FM.Models;
-using FM.Models.Batches;
 using FM.UI.IO;
 using System;
 using System.Collections.Generic;
@@ -15,18 +14,17 @@ namespace FM.UI.Workflows
         public void Execute()
         {
             OrdersManager manager = OrdersManagerFactory.Create();
-
             ConsoleIO.DisplayOrderDateRequest();
-
             string orderDate = ConsoleIO.GetOrderDate();
-
-            OrderBatch orderBatch = manager.LookupOrder(orderDate);
-
-           
-
-            ConsoleIO.DisplayOrderDetails(orderBatch.Orders[0], orderDate);
-            
-            Console.ReadLine();
+            List<Order> orderBatch = manager.LookupOrder(orderDate);
+            if (orderBatch == null)
+            {
+                ConsoleIO.DisplayInvalidOrderDateError(orderDate);
+            }
+            else
+            {
+                ConsoleIO.DisplayOrderDetails(orderBatch, orderDate);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FM.Models;
+﻿using FM.BLL;
+using FM.Models;
 using FM.UI;
 using FM.UI.IO;
 using System;
@@ -16,9 +17,7 @@ namespace FM.UI.Workflows
             while (true)
             {
                 ConsoleIO.DisplayMenu();
-
                 string choice = Console.ReadLine();
-
                 switch (choice)
                 {
                     case "1":

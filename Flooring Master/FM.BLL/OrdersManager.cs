@@ -1,5 +1,4 @@
 ﻿using FM.Models;
-using FM.Models.Batches;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +16,10 @@ namespace FM.BLL
             _ordersRepository = ordersRepository;
         }
 
-        public OrderBatch LookupOrder(string orderDate)
+        public List<Order> LookupOrder(string orderDate)
         {
-            OrderBatch orderBatch = _ordersRepository.LoadOrders(orderDate);
+            _ordersRepository.LoadAllOrders();
+            List<Order> orderBatch = _ordersRepository.LoadOrder(orderDate);
 
             return orderBatch;
         }
