@@ -9,18 +9,34 @@ namespace FM.Data.Repositories
 {
     public class MockRepository : IOrdersRepository
     {
+        private static bool _allOrdersLoaded;
+        private static bool _allProductsLoaded;
+        private static bool _allTaxesLoaded;
+
+        public MockRepository()
+        {
+            if (_allOrdersLoaded == false) LoadAllOrders();
+            if (_allProductsLoaded == false) LoadAllProducts();
+            if (_allTaxesLoaded == false) LoadAllTaxes();
+        }
 
         private static AllOrders _allOrders = new AllOrders()
         {
             AllOrderBatches = new Dictionary<string, List<Order>>()
         };
 
+        private static AllProducts _allProducts = new AllProducts()
+        {
+            AllProductEntries = new List<Product>()
+        };
+
+        private static AllTaxes _allTaxes = new AllTaxes()
+        {
+            AllTaxEntries = new List<Tax>()
+        };
+
         public void LoadAllOrders()
         {
-            AllOrders allOrders = new AllOrders();
-
-            allOrders.AllOrderBatches = new Dictionary<string, List<Order>>();
-
             List<Order> orderBatch = new List<Order>();
             string orderDate = "06012013";
             string orderEntry = "1,Wise,OH,6.25,Wood,100.00,5.15,4.75,515.00,475.00,61.88,1051.88";
@@ -43,11 +59,56 @@ namespace FM.Data.Repositories
             };
 
             orderBatch.Add(order);
+            _allOrders.AllOrderBatches.Add(orderDate, orderBatch);
+            _allOrdersLoaded = true;
+        }
 
-            allOrders.AllOrderBatches.Add(orderDate, orderBatch);
+        public void LoadAllProducts()
+        {
+            List<Product> productEntry = new List<Product>();
+            List<string> sampleData = new List<string>();
 
-            _allOrders = allOrders;
+            sampleData.Add("Carpet,2.25,2.10");
+            sampleData.Add("Laminate,1.75,2.10");
+            sampleData.Add("Tile,3.50,4.15");
+            sampleData.Add("Wood,5.15,4.75");
 
+            foreach (var entry in sampleData)
+            {
+                string[] productFields = entry.Split(',');
+                Product product = new Product()
+                {
+                    ProductType = productFields[0],
+                    CostPerSquareFoot = Decimal.Parse(productFields[1]),
+                    LaborCostPerSquareFoot = Decimal.Parse(productFields[2])
+                };
+                _allProducts.AllProductEntries.Add(product);
+            }
+            _allProductsLoaded = true;
+        }
+
+        public void LoadAllTaxes()
+        {
+            List<Tax> TaxEntry = new List<Tax>();
+            List<string> sampleData = new List<string>();
+
+            sampleData.Add("OH,Ohio,6.25");
+            sampleData.Add("PA,Pennsylvania,6.75");
+            sampleData.Add("MI,Michigan,5.75");
+            sampleData.Add("IN,Indiana,6.00");
+
+            foreach (var entry in sampleData)
+            {
+                string[] taxFields = entry.Split(',');
+                Tax tax = new Tax()
+                {
+                    StateAbbreviation = taxFields[0],
+                    StateName = taxFields[1],
+                    TaxRate = Decimal.Parse(taxFields[2])
+                };
+                _allTaxes.AllTaxEntries.Add(tax);
+            }
+            _allTaxesLoaded = true;
         }
 
         public List<Order> LoadOrder(string orderDate)
@@ -57,17 +118,51 @@ namespace FM.Data.Repositories
 
         }
 
-        public Order AddOrder()
+        public Order LoadOrder(string orderDate, string orderNumber)
         {
-            throw new NotImplementedException();
+            if (_allOrders.AllOrderBatches.ContainsKey(orderDate) == false ||
+                _allOrders.AllOrderBatches[orderDate].ElementAt(Int32.Parse(orderNumber) - 1) == null)
+                return null;
+            else return _allOrders.AllOrderBatches[orderDate].ElementAt(Int32.Parse(orderNumber) - 1);
         }
 
-        public Order EditOrder()
+        public Tax LoadTax(string state)
         {
-            throw new NotImplementedException();
+            foreach (var taxEntry in _allTaxes.AllTaxEntries)
+            {
+                if (taxEntry.StateAbbreviation == state) return taxEntry;
+            }
+            return null;
         }
 
-        public Order SaveOrder()
+        public Product LoadProduct(string productType)
+        {
+            foreach (var productEntry in _allProducts.AllProductEntries)
+            {
+                if (productEntry.ProductType == productType) return productEntry;
+            }
+            return null;
+        }
+
+        public void AddOrder(Order order, string orderDate)
+        {
+            bool orderDateExits = _allOrders.AllOrderBatches.ContainsKey(orderDate);
+
+            if (orderDateExits)
+            {
+                order.OrderNumber = _allOrders.AllOrderBatches[orderDate].Count() + 1;
+                _allOrders.AllOrderBatches[orderDate].Add(order);
+            }
+            else
+            {
+                List<Order> orderBatch = new List<Order>();
+                order.OrderNumber = 1;
+                orderBatch.Add(order);
+                _allOrders.AllOrderBatches.Add(orderDate, orderBatch);
+            }
+        }
+
+        public void SaveOrder()
         {
             throw new NotImplementedException();
         }

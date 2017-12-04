@@ -1,4 +1,5 @@
-﻿using FM.Models;
+﻿using FM.BLL;
+using FM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace FM.UI.IO
 
             Console.Clear();
             Console.WriteLine($"{uI.BorderTop}");
-            Console.WriteLine($"{uI.RowPrefix}Flooring Program");
+            Console.WriteLine($"{uI.RowPrefix}FLOORING PROGRAM");
             Console.WriteLine($"{uI.RowPrefix}");
             Console.WriteLine($"{uI.RowPrefix}1. Diplay Orders");
             Console.WriteLine($"{uI.RowPrefix}2. Add an Order");
@@ -37,7 +38,7 @@ namespace FM.UI.IO
             {
                 Console.WriteLine($"{uI.BorderTop}");
                 Console.WriteLine($"{uI.RowPrefix}{orderEntry.OrderNumber} {orderDate.ToString()}");
-                Console.WriteLine($"{uI.BorderBottom}");
+                Console.WriteLine($"{uI.BorderTop}");
                 Console.WriteLine($"{uI.RowPrefix}{orderEntry.CustomerName}");
                 Console.WriteLine($"{uI.RowPrefix}{orderEntry.State}");
                 Console.WriteLine($"{uI.RowPrefix}Product: {orderEntry.ProductType}");
@@ -45,29 +46,55 @@ namespace FM.UI.IO
                 Console.WriteLine($"{uI.RowPrefix}Labor {orderEntry.LaborCost}");
                 Console.WriteLine($"{uI.RowPrefix}Tax: {orderEntry.Tax}");
                 Console.WriteLine($"{uI.RowPrefix}Total: {orderEntry.Total} ");
+                Console.WriteLine($"{uI.RowPrefix}");
+                Console.WriteLine($"{uI.BorderBottom}");
             }
             Console.WriteLine("Press any key to return to main menu...");
             Console.ReadLine();
         }
 
-        public static void DisplayAddOrderMenu()
+        public static void DisplayAddOrderMenu(Dictionary<string, string> orderInputs)
         {
             UIElements uI = new UIElements();
 
             Console.Clear();
             Console.WriteLine($"{uI.BorderTop}");
-            Console.WriteLine($"{uI.RowPrefix}Add Order");
+            Console.WriteLine($"{uI.RowPrefix}ADD ORDER");
+            Console.WriteLine($"{uI.BorderBottom}");
+
+            foreach (var entry in orderInputs)
+            {
+                Console.WriteLine($"{uI.RowPrefix}{entry.Key}: {entry.Value}");
+            }
+        }
+
+        public static void DisplayEditOrderMenu()
+        {
+            UIElements uI = new UIElements();
+
+            Console.Clear();
+            Console.WriteLine($"{uI.BorderTop}");
+            Console.WriteLine($"{uI.RowPrefix}EDIT ORDER");
+            Console.WriteLine($"{uI.BorderBottom}");
+        }
+
+        public static void DisplayAddOrderFinalizeMenu(Dictionary<string, string> orderInputs)
+        {
+            UIElements uI = new UIElements();
+
+            Console.Clear();
+            Console.WriteLine($"{uI.BorderTop}");
+            Console.WriteLine($"{uI.RowPrefix}FINALIZE ORDER");
             Console.WriteLine($"{uI.BorderBottom}");
             Console.WriteLine($"{uI.BorderTop}");
-            Console.WriteLine($"{uI.RowPrefix}Order Date: ");
-            Console.WriteLine($"{uI.RowPrefix}Customer Name: ");
-            Console.WriteLine($"{uI.RowPrefix}State: ");
-            Console.WriteLine($"{uI.RowPrefix}Product Type: ");
-            Console.WriteLine($"{uI.RowPrefix}Area: ");
-            Console.WriteLine($"{uI.BorderBottom}");
-            Console.SetCursorPosition(14, 5);
+         
+            foreach (var entry in orderInputs)
+            {
+                Console.WriteLine($"{uI.RowPrefix}{entry.Key}: {entry.Value}");
+            }
 
-            Console.ReadLine();
+            Console.WriteLine($"{uI.BorderBottom}");
+            Console.WriteLine("Finalize order? (y/n): ");
 
         }
 
@@ -93,9 +120,25 @@ namespace FM.UI.IO
 
             Console.Clear();
             Console.WriteLine($"{uI.BorderTop}");
-            Console.WriteLine($"{uI.RowPrefix}Lookup Order");
+            Console.WriteLine($"{uI.RowPrefix}LOOKUP ORDER");
             Console.WriteLine($"{uI.BorderBottom}");
-            Console.Write($"\nEnter order date (DDMMYYYY): ");
+            Console.Write($"\nEnter Order Date (DDMMYYYY): ");
+        }
+
+        public static string GetLineInput(string inputName)
+        {
+            Console.Write($"Enter {inputName}: ");
+            string input = Console.ReadLine();
+            return input;
+        } 
+
+        public static bool GetFinalOK()
+        {
+            bool finalized;
+            if (Console.ReadLine() == "y") finalized = true;
+            else finalized = false;
+
+            return finalized;
         }
 
         public static string GetOrderDate()
@@ -105,3 +148,4 @@ namespace FM.UI.IO
         }
     }
 }
+     

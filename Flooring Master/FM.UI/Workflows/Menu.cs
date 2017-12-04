@@ -25,11 +25,13 @@ namespace FM.UI.Workflows
                         displayOrder.Execute();
                         break;
                     case "2":
-                        throw new NotImplementedException();
+                        AddOrder addOrder = new AddOrder();
+                        addOrder.Execute();
+                        break;
                     case "3":
-                        throw new NotImplementedException();
-                    case "4":
-                        throw new NotImplementedException();
+                        EditOrder editOrder = new EditOrder();
+                        editOrder.Execute();
+                        break;
                     case "5":
                         return;
                     default:

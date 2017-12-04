@@ -47,8 +47,10 @@
   <ItemGroup>
     <Compile Include="IO\ConsoleIO.cs" />
     <Compile Include="IO\UIElements.cs" />
+    <Compile Include="IO\Validation.cs" />
     <Compile Include="Workflows\AddOrder.cs" />
     <Compile Include="Workflows\DisplayOrder.cs" />
+    <Compile Include="Workflows\EditOrder.cs" />
     <Compile Include="Workflows\Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -8,10 +8,14 @@ namespace FM.Models
 {
     public interface IOrdersRepository
     {
-        void LoadAllOrders();
         List<Order> LoadOrder(string orderDate);
-        Order AddOrder();
-        Order EditOrder();
-        Order SaveOrder();
+        Order LoadOrder(string orderDate, string orderNumber);
+        Tax LoadTax(string state);
+        Product LoadProduct(string productType);
+        void LoadAllOrders();
+        void LoadAllTaxes();
+        void LoadAllProducts();
+        void AddOrder(Order order, string orderdate);
+        void SaveOrder();
     }
 }

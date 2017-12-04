@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllOrders.cs" />
+    <Compile Include="AllProducts.cs" />
+    <Compile Include="AllTaxes.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="IOrdersRepository.cs" />
     <Compile Include="Order.cs" />
