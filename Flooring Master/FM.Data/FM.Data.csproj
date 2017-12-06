@@ -50,9 +50,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SampleDate\Orders_06012013.txt" />
-    <Content Include="SampleDate\Products.txt" />
-    <Content Include="SampleDate\Taxes.txt" />
+    <Content Include="SampleData\Orders_06012013.txt" />
+    <Content Include="SampleData\Products.txt" />
+    <Content Include="SampleData\Taxes.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FM.Models\FM.Models.csproj">

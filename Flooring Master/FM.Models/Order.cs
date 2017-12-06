@@ -8,6 +8,7 @@ namespace FM.Models
 {
     public class Order
     {
+        public string OrderDate { get; set; }
         public int OrderNumber { get; set; }
         public string CustomerName { get; set; }
         public string State { get; set; }

@@ -21,17 +21,13 @@ namespace FM.UI.Workflows
                 switch (choice)
                 {
                     case "1":
-                        DisplayOrder displayOrder = new DisplayOrder();
+                        OrderbatchLookup displayOrder = new OrderbatchLookup();
                         displayOrder.Execute();
                         break;
                     case "2":
-                        AddOrder addOrder = new AddOrder();
-                        addOrder.Execute();
-                        break;
+                        throw new NotImplementedException();
                     case "3":
-                        EditOrder editOrder = new EditOrder();
-                        editOrder.Execute();
-                        break;
+                        throw new NotImplementedException();
                     case "5":
                         return;
                     default:

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FM.Models
+namespace FM.Models.Responses
 {
-    public class AllTaxes
+    public class OrderbatchLookupResponse : Response
     {
-        public List<Tax> AllTaxEntries { get; set; }
+        public List<Order> Orderbatch { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FM.BLL;
 using FM.Models;
+using FM.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,139 +14,63 @@ namespace FM.UI.IO
 
         public static void DisplayMenu()
         {
-            UIElements uI = new UIElements();
-
             Console.Clear();
-            Console.WriteLine($"{uI.BorderTop}");
-            Console.WriteLine($"{uI.RowPrefix}FLOORING PROGRAM");
-            Console.WriteLine($"{uI.RowPrefix}");
-            Console.WriteLine($"{uI.RowPrefix}1. Diplay Orders");
-            Console.WriteLine($"{uI.RowPrefix}2. Add an Order");
-            Console.WriteLine($"{uI.RowPrefix}3. Edit an Order");
-            Console.WriteLine($"{uI.RowPrefix}4. Remove an Order");
-            Console.WriteLine($"{uI.RowPrefix}5. Quit");
-            Console.WriteLine($"{uI.RowPrefix}");
-            Console.WriteLine($"{uI.BorderBottom}");
+            Console.WriteLine($"{UI.BorderTop}");
+            Console.WriteLine($"{UI.RowPrefix}FLOORING PROGRAM");
+            Console.WriteLine($"{UI.RowPrefix}");
+            Console.WriteLine($"{UI.RowPrefix}1. Diplay Orders");
+            Console.WriteLine($"{UI.RowPrefix}2. Add an Order");
+            Console.WriteLine($"{UI.RowPrefix}3. Edit an Order");
+            Console.WriteLine($"{UI.RowPrefix}4. Remove an Order");
+            Console.WriteLine($"{UI.RowPrefix}5. Quit");
+            Console.WriteLine($"{UI.RowPrefix}");
+            Console.WriteLine($"{UI.BorderBottom}");
             Console.Write("Enter Choice: ");
         }
 
-        public static void DisplayOrderDetails(List<Order> orderBatch, string orderDate)
+        public static void DisplayOrderbatch(OrderbatchLookupResponse response)
         {
-            UIElements uI = new UIElements();
-
             Console.Clear();
-            foreach (var orderEntry in orderBatch)
+            Console.WriteLine($"{UI.BorderTop}");
+            if (response.Success == false)
             {
-                Console.WriteLine($"{uI.BorderTop}");
-                Console.WriteLine($"{uI.RowPrefix}{orderEntry.OrderNumber} {orderDate.ToString()}");
-                Console.WriteLine($"{uI.BorderTop}");
-                Console.WriteLine($"{uI.RowPrefix}{orderEntry.CustomerName}");
-                Console.WriteLine($"{uI.RowPrefix}{orderEntry.State}");
-                Console.WriteLine($"{uI.RowPrefix}Product: {orderEntry.ProductType}");
-                Console.WriteLine($"{uI.RowPrefix}Materials: {orderEntry.MaterialCost} ");
-                Console.WriteLine($"{uI.RowPrefix}Labor {orderEntry.LaborCost}");
-                Console.WriteLine($"{uI.RowPrefix}Tax: {orderEntry.Tax}");
-                Console.WriteLine($"{uI.RowPrefix}Total: {orderEntry.Total} ");
-                Console.WriteLine($"{uI.RowPrefix}");
-                Console.WriteLine($"{uI.BorderBottom}");
+                Console.WriteLine($"{UI.RowPrefix}{response.Message}");
             }
-            Console.WriteLine("Press any key to return to main menu...");
-            Console.ReadLine();
-        }
-
-        public static void DisplayAddOrderMenu(Dictionary<string, string> orderInputs)
-        {
-            UIElements uI = new UIElements();
-
-            Console.Clear();
-            Console.WriteLine($"{uI.BorderTop}");
-            Console.WriteLine($"{uI.RowPrefix}ADD ORDER");
-            Console.WriteLine($"{uI.BorderBottom}");
-
-            foreach (var entry in orderInputs)
+            else
             {
-                Console.WriteLine($"{uI.RowPrefix}{entry.Key}: {entry.Value}");
+                foreach (var order in response.Orderbatch)
+                {
+                    Console.WriteLine($"{UI.HR}");
+                    Console.WriteLine($"{UI.RowPrefix}{order.OrderNumber} {order.OrderDate}");
+                    Console.WriteLine($"{UI.RowPrefix}{order.CustomerName}");
+                    Console.WriteLine($"{UI.RowPrefix}{order.State}");
+                    Console.WriteLine($"{UI.RowPrefix}Product: {order.ProductType}");
+                    Console.WriteLine($"{UI.RowPrefix}Materials: {order.MaterialCost}");
+                    Console.WriteLine($"{UI.RowPrefix}Labor: {order.LaborCost}");
+                    Console.WriteLine($"{UI.RowPrefix}Tax: {order.Tax}");
+                    Console.WriteLine($"{UI.RowPrefix}Total: {order.Total}");
+                    Console.WriteLine($"{UI.BorderBottom}");
+                }
+                PromptContinue();
             }
-        }
-
-        public static void DisplayEditOrderMenu()
-        {
-            UIElements uI = new UIElements();
-
-            Console.Clear();
-            Console.WriteLine($"{uI.BorderTop}");
-            Console.WriteLine($"{uI.RowPrefix}EDIT ORDER");
-            Console.WriteLine($"{uI.BorderBottom}");
-        }
-
-        public static void DisplayAddOrderFinalizeMenu(Dictionary<string, string> orderInputs)
-        {
-            UIElements uI = new UIElements();
-
-            Console.Clear();
-            Console.WriteLine($"{uI.BorderTop}");
-            Console.WriteLine($"{uI.RowPrefix}FINALIZE ORDER");
-            Console.WriteLine($"{uI.BorderBottom}");
-            Console.WriteLine($"{uI.BorderTop}");
-         
-            foreach (var entry in orderInputs)
-            {
-                Console.WriteLine($"{uI.RowPrefix}{entry.Key}: {entry.Value}");
-            }
-
-            Console.WriteLine($"{uI.BorderBottom}");
-            Console.WriteLine("Finalize order? (y/n): ");
-
-        }
-
-        public static void DisplayInvalidOrderDateError(string orderDate)
-        {
-            UIElements uI = new UIElements();
-            Console.Clear();
-            Console.WriteLine($"{uI.BorderTop}");
-            Console.WriteLine($"{uI.RowPrefix}");
-            Console.Write($"{uI.RowPrefix}");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"{orderDate} is an invalid order date!");
-            Console.ResetColor();
-            Console.WriteLine($"{uI.RowPrefix}");
-            Console.WriteLine($"{uI.BorderBottom}");
-            Console.WriteLine("Press any key to return to main menu...");
-            Console.ReadLine();
         }
 
         public static void DisplayOrderDateRequest()
         {
-            UIElements uI = new UIElements();
 
             Console.Clear();
-            Console.WriteLine($"{uI.BorderTop}");
-            Console.WriteLine($"{uI.RowPrefix}LOOKUP ORDER");
-            Console.WriteLine($"{uI.BorderBottom}");
+            Console.WriteLine($"{UI.BorderTop}");
+            Console.WriteLine($"{UI.RowPrefix}LOOKUP ORDER");
+            Console.WriteLine($"{UI.BorderBottom}");
             Console.Write($"\nEnter Order Date (DDMMYYYY): ");
         }
 
-        public static string GetLineInput(string inputName)
+        public static void PromptContinue()
         {
-            Console.Write($"Enter {inputName}: ");
-            string input = Console.ReadLine();
-            return input;
-        } 
-
-        public static bool GetFinalOK()
-        {
-            bool finalized;
-            if (Console.ReadLine() == "y") finalized = true;
-            else finalized = false;
-
-            return finalized;
-        }
-
-        public static string GetOrderDate()
-        {
-            string orderDate = Console.ReadLine();
-            return orderDate;
+            Console.WriteLine("Press enter to continue...");
+            
+            while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
         }
     }
 }
-     
+

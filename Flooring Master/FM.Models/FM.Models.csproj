@@ -43,13 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllOrders.cs" />
-    <Compile Include="AllProducts.cs" />
-    <Compile Include="AllTaxes.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="IOrdersRepository.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Responses\OrderbatchLookupResponse.cs" />
+    <Compile Include="Responses\Response.cs" />
     <Compile Include="Tax.cs" />
   </ItemGroup>
   <ItemGroup>

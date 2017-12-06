@@ -1,4 +1,5 @@
 ﻿using FM.Models;
+using FM.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,82 +17,23 @@ namespace FM.BLL
             _ordersRepository = ordersRepository;
         }
 
-        public List<Order> LookupOrder(string orderDate)
+        public OrderbatchLookupResponse LookupOrderbatch(string orderDate)
         {
-            
-            List<Order> orderBatch = _ordersRepository.LoadOrder(orderDate);
-
-            return orderBatch;
-        }
-
-        public Tax LookupTax(string state)
-        {
-            _ordersRepository.LoadAllTaxes();
-            Tax tax = _ordersRepository.LoadTax(state);
-
-            return tax;
-        }
-
-        public Product LookupProduct(string productType)
-        {
-            _ordersRepository.LoadAllProducts();
-            Product product = _ordersRepository.LoadProduct(productType);
-
-            return product;
-        }
-
-        public Dictionary<string, string> CalculateFields(Dictionary<string, string> orderInputs)
-        {
-            decimal costPerSquareFoot = LookupProduct(orderInputs["Product Type"]).CostPerSquareFoot;
-            decimal laborCostPerSquareFoot = LookupProduct(orderInputs["Product Type"]).LaborCostPerSquareFoot;
-            decimal materialCost = Decimal.Parse(orderInputs["Area"]) * costPerSquareFoot;
-            decimal laborCost = Decimal.Parse(orderInputs["Area"]) * laborCostPerSquareFoot;
-            decimal taxRate = LookupTax(orderInputs["State"]).TaxRate;
-            decimal tax = ((materialCost + laborCost) * (taxRate / 100));
-            decimal total = materialCost + laborCost + tax;
-
-            orderInputs.Add("Tax Rate", taxRate.ToString());
-            orderInputs.Add("CostPerSquareFoot", costPerSquareFoot.ToString());
-            orderInputs.Add("LaborCostPerSquareFoot", laborCostPerSquareFoot.ToString());
-            orderInputs.Add("MaterialCost", materialCost.ToString());
-            orderInputs.Add("LaborCost", laborCost.ToString());
-            orderInputs.Add("Tax", tax.ToString());
-            orderInputs.Add("Total", total.ToString());
-
-            return orderInputs;
-        }
-
-        public void AddOrder(Dictionary<string, string> orderInputs)
-        {
-            Order order = ConvertOrderInputsToOrder(orderInputs);
-            _ordersRepository.AddOrder(order, orderInputs["Order Date"]);
-        }
-
-        private Order ConvertOrderInputsToOrder(Dictionary<string, string> orderInputs)
-        {
-            Order order = new Order
+            OrderbatchLookupResponse response = new OrderbatchLookupResponse
             {
-                CustomerName = orderInputs["Customer Name"],
-                State = orderInputs["State"],
-                TaxRate = Decimal.Parse(orderInputs["Tax Rate"]),
-                ProductType = orderInputs["Product Type"],
-                Area = Decimal.Parse(orderInputs["Area"]),
-                CostPerSquareFoot = Decimal.Parse(orderInputs["CostPerSquareFoot"]),
-                LaborCostPerSquareFoot = Decimal.Parse(orderInputs["LaborCostPerSquareFoot"]),
-                MaterialCost = Decimal.Parse(orderInputs["MaterialCost"]),
-                LaborCost = Decimal.Parse(orderInputs["LaborCost"]),
-                Tax = Decimal.Parse(orderInputs["Tax"]),
-                Total = Decimal.Parse(orderInputs["Total"])
+                Orderbatch = _ordersRepository.LoadOrderbatch(orderDate)
             };
-            return order;
-        }
 
-        public Order RetrieveOrder(string orderDate, string orderNumber)
-        {
-            Order orderBatch = _ordersRepository.LoadOrder(orderDate, orderNumber);
-
-            return orderBatch;
-
+            if (response.Orderbatch == null)
+            {
+                response.Success = false;
+                response.Message = $"{ orderDate } is invalid!";
+            }
+            else
+            {
+                response.Success = true;
+            }
+            return response;
         }
     }
 }
