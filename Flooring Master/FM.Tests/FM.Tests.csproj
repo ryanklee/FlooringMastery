@@ -43,10 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FM.BLL\FM.BLL.csproj">
@@ -57,6 +55,14 @@
       <Project>{94139834-d6f8-43b9-9e4a-5482bc0f9fb4}</Project>
       <Name>FM.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FM.Models\FM.Models.csproj">
+      <Project>{304A9C73-C1D2-434D-9141-7307D31B9027}</Project>
+      <Name>FM.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

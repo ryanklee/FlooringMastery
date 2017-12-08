@@ -44,12 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OrdersManager.cs" />
-    <Compile Include="OrdersManagerFactory.cs" />
+    <Compile Include="OrderManager.cs" />
+    <Compile Include="OrderManagerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FM.Data\FM.Data.csproj">
@@ -60,6 +57,9 @@
       <Project>{304a9c73-c1d2-434d-9141-7307d31b9027}</Project>
       <Name>FM.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

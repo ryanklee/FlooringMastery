@@ -14,7 +14,7 @@ namespace FM.UI.Workflows
     {
         public void Execute()
         {
-            OrdersManager manager = OrdersManagerFactory.Create();
+            OrderManager manager = OrderManagerFactory.Create();
             ConsoleIO.DisplayOrderDateRequest();
             string orderDate = Console.ReadLine();
             OrderbatchLookupResponse response = manager.LookupOrderbatch(orderDate);

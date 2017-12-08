@@ -34,7 +34,7 @@ namespace FM.Data.Repositories
             {
                 if (order.OrderDate == orderDate) return _orderBatch;
             }
-            return _orderBatch;
+            return null;
         }
 
         public Order LoadOrder(string orderDate, int orderNumber)

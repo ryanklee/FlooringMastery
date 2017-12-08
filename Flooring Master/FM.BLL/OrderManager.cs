@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace FM.BLL
 {
-    public class OrdersManager
+    public class OrderManager
     {
         private IOrdersRepository _ordersRepository;
 
-        public OrdersManager(IOrdersRepository ordersRepository)
+        public OrderManager(IOrdersRepository ordersRepository)
         {
             _ordersRepository = ordersRepository;
         }
@@ -27,7 +27,7 @@ namespace FM.BLL
             if (response.Orderbatch == null)
             {
                 response.Success = false;
-                response.Message = $"{ orderDate } is invalid!";
+                response.Message = $"{ orderDate } is invalid";
             }
             else
             {

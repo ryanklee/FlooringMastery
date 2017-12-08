@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace FM.BLL
 {
-    public static class OrdersManagerFactory
+    public static class OrderManagerFactory
     {
-        public static OrdersManager Create()
+        public static OrderManager Create()
         {
             string mode = ConfigurationManager.AppSettings["Mode"].ToString();
 
             switch (mode)
             {
                 case "Test":
-                    return new OrdersManager(new MockRepository());
+                    return new OrderManager(new MockRepository());
                 case "Production":
                     throw new NotImplementedException();
                 default:

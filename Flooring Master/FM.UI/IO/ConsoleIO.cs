@@ -35,6 +35,8 @@ namespace FM.UI.IO
             if (response.Success == false)
             {
                 Console.WriteLine($"{UI.RowPrefix}{response.Message}");
+                Console.WriteLine($"{UI.BorderBottom}");
+                PromptContinue();
             }
             else
             {

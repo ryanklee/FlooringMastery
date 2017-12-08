@@ -47,9 +47,6 @@
     <Compile Include="Repositories\MockRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="SampleData\Orders_06012013.txt" />
     <Content Include="SampleData\Products.txt" />
     <Content Include="SampleData\Taxes.txt" />
@@ -59,6 +56,9 @@
       <Project>{304A9C73-C1D2-434D-9141-7307D31B9027}</Project>
       <Name>FM.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
