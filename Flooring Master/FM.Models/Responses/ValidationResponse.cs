@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace FM.Models.Responses
 {
-    public class OrderbatchLookupResponse : Response
+    public class ValidationResponse : Response
     {
-        public List<Order> Orderbatch { get; set; }
     }
 }

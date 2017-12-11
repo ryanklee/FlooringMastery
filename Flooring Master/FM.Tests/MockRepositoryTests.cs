@@ -17,11 +17,22 @@ namespace FM.Tests
         {
             OrderManager manager = OrderManagerFactory.Create();
 
-            OrderbatchLookupResponse response = manager.LookupOrderbatch("06012013");
+            OrderLookupResponse response = manager.LookupOrder("06012013");
 
-            Assert.IsNotNull(response.Orderbatch);
+            Assert.IsNotNull(response.Order);
             Assert.IsTrue(response.Success);
-            Assert.AreEqual(1, response.Orderbatch[0].OrderNumber);
+            Assert.AreEqual(1, response.Order.ElementAt(0).OrderNumber);
+        }
+
+        [Test]
+        public void ReturnFalsyResponseObjectOnBadOrderdate()
+        {
+            OrderManager manager = OrderManagerFactory.Create();
+
+            OrderLookupResponse response = manager.LookupOrder("00000000");
+
+            Assert.IsFalse(response.Order.Any());
+            Assert.IsFalse(response.Success);
         }
     }
 }

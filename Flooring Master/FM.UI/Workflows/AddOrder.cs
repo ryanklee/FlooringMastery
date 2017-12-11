@@ -1,5 +1,4 @@
 ﻿using FM.BLL;
-using FM.Models;
 using FM.Models.Responses;
 using FM.UI.IO;
 using System;
@@ -10,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace FM.UI.Workflows
 {
-    public class OrderbatchLookup
+    public class AddOrder
     {
         public void Execute()
         {
             OrderManager manager = OrderManagerFactory.Create();
             ConsoleIO.DisplayOrderDateRequest();
             string orderDate = Console.ReadLine();
-            OrderbatchLookupResponse response = manager.LookupOrderbatch(orderDate);
-            ConsoleIO.DisplayOrderbatch(response);
-        }
+            OrderAddResponse response = manager.AddOrder(orderDate);
+            ConsoleIO.DisplayAddOrder(response);
+        } 
     }
 }

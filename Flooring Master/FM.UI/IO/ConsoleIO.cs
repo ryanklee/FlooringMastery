@@ -28,7 +28,7 @@ namespace FM.UI.IO
             Console.Write("Enter Choice: ");
         }
 
-        public static void DisplayOrderbatch(OrderbatchLookupResponse response)
+        public static void DisplayOrder(OrderLookupResponse response)
         {
             Console.Clear();
             Console.WriteLine($"{UI.BorderTop}");
@@ -40,7 +40,7 @@ namespace FM.UI.IO
             }
             else
             {
-                foreach (var order in response.Orderbatch)
+                foreach (var order in response.Order)
                 {
                     Console.WriteLine($"{UI.HR}");
                     Console.WriteLine($"{UI.RowPrefix}{order.OrderNumber} {order.OrderDate}");
@@ -57,6 +57,43 @@ namespace FM.UI.IO
             }
         }
 
+        public static OrderAddResponse DisplayAddOrder(OrderAddResponse orderAddResponse)
+        {
+            Validation validate = new Validation();
+            Console.Clear();
+            Console.WriteLine($"{UI.BorderTop}");
+
+            if (orderAddResponse.Success == false)
+            {
+                Console.WriteLine($"{UI.RowPrefix}{orderAddResponse.Message}");
+                Console.WriteLine($"{UI.BorderBottom}");
+                PromptContinue();
+            }
+            else
+            {
+                while (true)
+                {
+                    Console.Clear();
+                    Console.Write($"Customer Name: ");
+                    string custName = Console.ReadLine();
+                    ValidationResponse validationResponse = validate.CustomerName(custName);
+                    if (validationResponse.Success == false)
+                    {
+                        Console.WriteLine(validationResponse.Message);
+                        PromptContinue();
+                    }
+                    else
+                    {
+                        orderAddResponse.Order.CustomerName = custName;
+                        break;
+                    }
+                }
+            }
+
+            return orderAddResponse;
+
+        }
+
         public static void DisplayOrderDateRequest()
         {
 
@@ -70,7 +107,7 @@ namespace FM.UI.IO
         public static void PromptContinue()
         {
             Console.WriteLine("Press enter to continue...");
-            
+
             while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
         }
     }

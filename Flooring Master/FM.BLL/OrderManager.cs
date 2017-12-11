@@ -17,23 +17,47 @@ namespace FM.BLL
             _ordersRepository = ordersRepository;
         }
 
-        public OrderbatchLookupResponse LookupOrderbatch(string orderDate)
+        public OrderLookupResponse LookupOrder(string orderDate)
         {
-            OrderbatchLookupResponse response = new OrderbatchLookupResponse
+            OrderLookupResponse response = new OrderLookupResponse
             {
-                Orderbatch = _ordersRepository.LoadOrderbatch(orderDate)
+                Order = _ordersRepository.LoadOrder(orderDate)
             };
 
-            if (response.Orderbatch == null)
+            if (!response.Order.Any())
             {
                 response.Success = false;
-                response.Message = $"{ orderDate } is invalid";
+                response.Message = $"No order for { orderDate } exists.";
             }
             else
             {
                 response.Success = true;
             }
             return response;
+        }
+
+        public OrderAddResponse AddOrder(string orderDate)
+        {
+            Validation validate = new Validation();
+            OrderAddResponse response = new OrderAddResponse
+            {
+                Order = new Order()
+            };
+
+            ValidationResponse validationResponse = validate.OrderDateIsInFuture(orderDate);
+
+            if (validationResponse.Success == false)
+            {
+                response.Success = false;
+                response.Message = validationResponse.Message;
+                return response;
+            }
+            else
+            {
+                response.Success = true;
+                return response;
+            }
+
         }
     }
 }

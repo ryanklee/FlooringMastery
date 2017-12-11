@@ -28,23 +28,22 @@ namespace FM.Data.Repositories
 
         private static List<Order> _orderBatch = new List<Order> { _order };
 
-        public List<Order> LoadOrderbatch(string orderDate)
+        public IEnumerable<Order> LoadOrder(string orderDate)
         {
             foreach (var order in _orderBatch)
             {
-                if (order.OrderDate == orderDate) return _orderBatch;
+                if (order.OrderDate == orderDate) yield return order;
             }
-            return null;
         }
 
-        public Order LoadOrder(string orderDate, int orderNumber)
+        public IEnumerable<Order> LoadOrder(string orderDate, int orderNumber)
         {
             throw new NotImplementedException();
         }
 
-        public void SaveOrder()
+        public void SaveOrder(Order order)
         {
-            throw new NotImplementedException();
+            _orderBatch.Add(order);
         }
     }
 }

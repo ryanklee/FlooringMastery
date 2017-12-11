@@ -8,8 +8,8 @@ namespace FM.Models
 {
     public interface IOrdersRepository
     {
-        List<Order> LoadOrderbatch(string orderDate);
-        Order LoadOrder(string orderDate, int orderNumber);
-        void SaveOrder();
+        IEnumerable<Order> LoadOrder(string orderDate);
+        IEnumerable<Order> LoadOrder(string orderDate, int orderNumber);
+        void SaveOrder(Order order);
     }
 }
