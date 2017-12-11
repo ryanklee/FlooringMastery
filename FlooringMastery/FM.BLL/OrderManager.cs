@@ -44,7 +44,7 @@ namespace FM.BLL
                 Order = new Order()
             };
 
-            ValidationResponse validationResponse = validate.OrderDateIsInFuture(orderDate);
+            Response validationResponse = validate.OrderDateIsInFuture(orderDate);
 
             if (validationResponse.Success == false)
             {

@@ -50,7 +50,6 @@
     <Compile Include="Responses\OrderAddResponse.cs" />
     <Compile Include="Responses\OrderLookupResponse.cs" />
     <Compile Include="Responses\Response.cs" />
-    <Compile Include="Responses\ValidationResponse.cs" />
     <Compile Include="Tax.cs" />
   </ItemGroup>
   <ItemGroup>

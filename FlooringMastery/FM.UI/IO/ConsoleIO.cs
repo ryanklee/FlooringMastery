@@ -76,7 +76,7 @@ namespace FM.UI.IO
                     Console.Clear();
                     Console.Write($"Customer Name: ");
                     string custName = Console.ReadLine();
-                    ValidationResponse validationResponse = validate.CustomerName(custName);
+                    Response validationResponse = validate.CustomerName(custName);
                     if (validationResponse.Success == false)
                     {
                         Console.WriteLine(validationResponse.Message);
@@ -89,9 +89,7 @@ namespace FM.UI.IO
                     }
                 }
             }
-
             return orderAddResponse;
-
         }
 
         public static void DisplayOrderDateRequest()

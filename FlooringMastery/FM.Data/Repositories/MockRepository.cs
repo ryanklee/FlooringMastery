@@ -26,6 +26,20 @@ namespace FM.Data.Repositories
             Total = 1051.88M
         };
 
+        private static Tax _tax = new Tax
+        {
+            StateAbbreviation = "OH",
+            StateName = "Ohio",
+            TaxRate = 6.00M
+        };
+
+        private static Product product = new Product
+        {
+            ProductType = "Carpet",
+            CostPerSquareFoot = 2.25M,
+            LaborCostPerSquareFoot = 2.10M
+        };
+
         private static List<Order> _orderBatch = new List<Order> { _order };
 
         public IEnumerable<Order> LoadOrder(string orderDate)
