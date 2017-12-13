@@ -1,4 +1,5 @@
 ﻿using FM.Models;
+using FM.Models.Interfaces;
 using FM.Models.Responses;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FM.BLL
+namespace FM.BLL.Controllers
 {
     public class OrderManager
     {
@@ -41,7 +42,7 @@ namespace FM.BLL
             Validation validate = new Validation();
             OrderAddResponse response = new OrderAddResponse
             {
-                Order = new Order()
+                Order = new Order(),
             };
 
             Response validationResponse = validate.OrderDateIsInFuture(orderDate);
@@ -57,7 +58,6 @@ namespace FM.BLL
                 response.Success = true;
                 return response;
             }
-
         }
     }
 }

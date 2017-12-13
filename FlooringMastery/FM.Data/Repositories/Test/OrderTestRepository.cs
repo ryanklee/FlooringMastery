@@ -1,13 +1,14 @@
 ﻿using FM.Models;
+using FM.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FM.Data.Repositories
+namespace FM.Data.Repositories.Test
 {
-    public class MockRepository : IOrdersRepository
+    public class OrderTestRepository : IOrdersRepository
     {
         private static Order _order = new Order
         {
@@ -26,33 +27,16 @@ namespace FM.Data.Repositories
             Total = 1051.88M
         };
 
-        private static Tax _tax = new Tax
-        {
-            StateAbbreviation = "OH",
-            StateName = "Ohio",
-            TaxRate = 6.00M
-        };
-
-        private static Product product = new Product
-        {
-            ProductType = "Carpet",
-            CostPerSquareFoot = 2.25M,
-            LaborCostPerSquareFoot = 2.10M
-        };
-
         private static List<Order> _orderBatch = new List<Order> { _order };
 
         public IEnumerable<Order> LoadOrder(string orderDate)
         {
-            foreach (var order in _orderBatch)
-            {
-                if (order.OrderDate == orderDate) yield return order;
-            }
+            return _orderBatch.Where(order => order.OrderDate == orderDate);
         }
 
         public IEnumerable<Order> LoadOrder(string orderDate, int orderNumber)
         {
-            throw new NotImplementedException();
+            return _orderBatch.Where(order => order.OrderDate == orderDate && order.OrderNumber == orderNumber);
         }
 
         public void SaveOrder(Order order)

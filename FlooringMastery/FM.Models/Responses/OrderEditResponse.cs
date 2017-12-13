@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace FM.Models.Responses
 {
-    public class OrderAddResponse : Response
+    public class OrderEditResponse : Response
     {
         public Order Order { get; set; }
-        public List<Tax> Taxes { get; set; }
-        public List<Product> Products { get; set; }
     }
 }

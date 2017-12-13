@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FM.Models
+namespace FM.Models.Interfaces
 {
     public interface IOrdersRepository
     {

@@ -11,9 +11,9 @@ namespace FM.BLL
 {
     public class Validation
     {
-        public Response OrderDateIsInFuture(string orderDate)
+        public ValidationResponse OrderDateIsInFuture(string orderDate)
         {
-            Response response = new Response();
+            ValidationResponse response = new ValidationResponse();
             DateTime parsedOrderDate;
 
             if (DateTime.TryParseExact(orderDate, "ddMMyyyy", CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedOrderDate))
@@ -39,9 +39,9 @@ namespace FM.BLL
             return response;
         }
 
-        public Response CustomerName(string custName)
+        public ValidationResponse CustomerName(string custName)
         {
-            Response response = new Response();
+            ValidationResponse response = new ValidationResponse();
             var regex = new Regex("^[a-zA-Z0-9 /.,]*$");
 
             if (custName == "")
@@ -61,9 +61,6 @@ namespace FM.BLL
                 response.Success = true;
                 return response;
             }
-
-
-
         }
     }
 }

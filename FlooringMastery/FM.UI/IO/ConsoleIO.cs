@@ -1,5 +1,6 @@
 ﻿using FM.BLL;
-using FM.Models;
+using FM.BLL.Controllers;
+using FM.BLL.Factories;
 using FM.Models.Responses;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,7 @@ namespace FM.UI.IO
 
         public static OrderAddResponse DisplayAddOrder(OrderAddResponse orderAddResponse)
         {
+            OrderManager manager = OrderManagerFactory.Create();
             Validation validate = new Validation();
             Console.Clear();
             Console.WriteLine($"{UI.BorderTop}");
@@ -74,9 +76,9 @@ namespace FM.UI.IO
                 while (true)
                 {
                     Console.Clear();
-                    Console.Write($"Customer Name: ");
+                    Console.Write("Customer Name: ");
                     string custName = Console.ReadLine();
-                    Response validationResponse = validate.CustomerName(custName);
+                    ValidationResponse validationResponse = validate.CustomerName(custName);
                     if (validationResponse.Success == false)
                     {
                         Console.WriteLine(validationResponse.Message);
@@ -86,6 +88,23 @@ namespace FM.UI.IO
                     {
                         orderAddResponse.Order.CustomerName = custName;
                         break;
+                    }
+                }
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Customer Name: {orderAddResponse.Order.CustomerName}");
+                    Console.Write("State: ");
+                    string state = Console.ReadLine();
+                    orderAddResponse = manager.StateOnFile(state, orderAddResponse);
+                    if (orderAddResponse.Success == false)
+                    {
+                        Console.WriteLine(orderAddResponse.Message);
+                        PromptContinue();
+                    }
+                    else
+                    {
+                        orderAddResponse.Order.State = state.Substring(0, 1).ToUpper() + state.Substring(1).ToLower();
                     }
                 }
             }
