@@ -31,7 +31,6 @@ namespace FM.Data.Repositories.Test
 
         public IEnumerable<Order> LoadOrder(string orderDate)
         {
-            
             return _orderBatch.Where(order => order.OrderDate == orderDate);
         }
 

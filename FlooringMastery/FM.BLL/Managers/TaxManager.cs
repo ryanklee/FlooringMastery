@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FM.BLL.Controllers
+namespace FM.BLL.Managers
 {
     public class TaxManager
     {

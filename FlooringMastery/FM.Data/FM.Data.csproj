@@ -60,10 +60,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Folder Include="Repositories\Production\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\Production\" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
