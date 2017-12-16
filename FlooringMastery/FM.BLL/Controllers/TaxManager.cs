@@ -1,4 +1,5 @@
-﻿using FM.Models.Responses;
+﻿using FM.Models.Interfaces;
+using FM.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,48 @@ namespace FM.BLL.Controllers
 {
     public class TaxManager
     {
-        public OrderAddResponse StateOnFile(string state, OrderAddResponse orderAddResponse)
+        private ITaxRepository _taxRepository;
+
+        public TaxManager(ITaxRepository taxRepository)
         {
-            state = state.Substring(0, 1).ToUpper() + state.Substring(1).ToLower();
-            foreach (var entry in orderAddResponse.Taxes)
+            _taxRepository = taxRepository;
+        }
+
+        public bool StateExists(string state)
+        {
+            return _taxRepository.LoadTaxes().Exists(entry => entry.StateName.ToUpper() == state.ToUpper());
+        }
+
+        public OrderAddResponse GetStateTaxRate(string state, OrderAddResponse response)
+        {
+            foreach (var entry in _taxRepository.LoadTaxes())
             {
-                if (entry.StateName == state)
+                if (entry.StateName.ToUpper() == state.ToUpper())
                 {
-                    orderAddResponse.Success = true;
-                    return orderAddResponse;
+                    response.Order.TaxRate = entry.TaxRate;
+                    return response;
                 }
             }
-            orderAddResponse.Success = false;
-            orderAddResponse.Message = "State not on file.";
-            return orderAddResponse;
+            response.Success = false;
+            response.Message = "No such state on file.";
+            return response;
+        }
+
+        public OrderAddResponse CheckState(string state, OrderAddResponse orderAddResponse)
+        {
+            if (StateExists(state) == false)
+            {
+                orderAddResponse.Success = false;
+                orderAddResponse.Message = ($"{state} does not exist on file.");
+                return orderAddResponse;
+            }
+            else
+            {
+                orderAddResponse.Success = true;
+                orderAddResponse.Order.State = state;
+                orderAddResponse = GetStateTaxRate(state, orderAddResponse);
+                return orderAddResponse;
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace FM.Tests
         public void OrderDatesFailPassFuturePastValidation(string dateTime, bool expectedResult)
         {
             Validation validate = new Validation();
-            Response response = validate.OrderDateIsInFuture(dateTime);
+            ValidationResponse response = validate.OrderDateIsInFuture(dateTime);
             Assert.AreEqual(expectedResult, response.Success);
         }
 
@@ -34,7 +34,21 @@ namespace FM.Tests
         public void CustomerNameContainsOnlyNumberDatesSpacesCommasAndPeriods(string customerName, bool expectedResult)
         {
             Validation validate = new Validation();
-            Response response = validate.CustomerName(customerName);
+            ValidationResponse response = validate.CustomerName(customerName);
+            Assert.AreEqual(expectedResult, response.Success);
+        }
+
+        [Test]
+        [TestCase("not a number", false)]
+        [TestCase("-5", false)]
+        [TestCase("0", false)]
+        [TestCase("0.1", true)]
+        [TestCase("5", true)]
+        [TestCase("5.0", true)]
+        public void BadAreaInputFails(string area, bool expectedResult)
+        {
+            Validation validate = new Validation();
+            ValidationResponse response = validate.Area(area);
             Assert.AreEqual(expectedResult, response.Success);
         }
     }

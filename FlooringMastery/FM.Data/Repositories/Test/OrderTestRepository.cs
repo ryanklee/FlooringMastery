@@ -31,6 +31,7 @@ namespace FM.Data.Repositories.Test
 
         public IEnumerable<Order> LoadOrder(string orderDate)
         {
+            
             return _orderBatch.Where(order => order.OrderDate == orderDate);
         }
 
@@ -41,6 +42,18 @@ namespace FM.Data.Repositories.Test
 
         public void SaveOrder(Order order)
         {
+            //check if order has default decimal value, i.e it's a new order
+            if (order.OrderNumber == 0)
+            {
+                //check if orderdate is already on file
+                if (_orderBatch.Exists(orderEntry => orderEntry.OrderDate == order.OrderDate))
+                {
+                    //yes? then order number == max existing order number + 1
+                    order.OrderNumber = _orderBatch.Where(orderEntry => orderEntry.OrderDate == order.OrderDate).Max(orderEntry => orderEntry.OrderNumber) + 1;
+                }
+                //no? then make order number == 1
+                else order.OrderNumber++;
+            }
             _orderBatch.Add(order);
         }
     }

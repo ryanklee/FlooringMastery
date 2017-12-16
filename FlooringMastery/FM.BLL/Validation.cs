@@ -62,5 +62,28 @@ namespace FM.BLL
                 return response;
             }
         }
+
+        public ValidationResponse Area(string area)
+        {
+            ValidationResponse response = new ValidationResponse();
+
+            if (Decimal.TryParse(area, out decimal parsedArea))
+            {
+                if (parsedArea > 0)
+                {
+                response.Success = true;
+                return response;
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Message = "Area must be positive number";
+                }
+            }
+
+            response.Success = false;
+            response.Message = $"{area} not a valid number.";
+            return response;
+        }
     }
 }

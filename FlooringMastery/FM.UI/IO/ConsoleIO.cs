@@ -1,6 +1,7 @@
 ﻿using FM.BLL;
 using FM.BLL.Controllers;
 using FM.BLL.Factories;
+using FM.Models;
 using FM.Models.Responses;
 using System;
 using System.Collections.Generic;
@@ -29,98 +30,119 @@ namespace FM.UI.IO
             Console.Write("Enter Choice: ");
         }
 
+
         public static void DisplayOrder(OrderLookupResponse response)
         {
             Console.Clear();
-            Console.WriteLine($"{UI.BorderTop}");
-            if (response.Success == false)
+            DisplayHeader("ORDER LOOKUP");
+
+            foreach (var order in response.Order)
             {
-                Console.WriteLine($"{UI.RowPrefix}{response.Message}");
+                Console.WriteLine($"{UI.HR}");
+                Console.WriteLine($"{UI.RowPrefix}{order.OrderNumber} {order.OrderDate}");
+                Console.WriteLine($"{UI.RowPrefix}{order.CustomerName}");
+                Console.WriteLine($"{UI.RowPrefix}{order.State}");
+                Console.WriteLine($"{UI.RowPrefix}Product: {order.ProductType}");
+                Console.WriteLine($"{UI.RowPrefix}Materials: {order.MaterialCost}");
+                Console.WriteLine($"{UI.RowPrefix}Labor: {order.LaborCost}");
+                Console.WriteLine($"{UI.RowPrefix}Tax: {order.Tax}");
+                Console.WriteLine($"{UI.RowPrefix}Total: {order.Total}");
                 Console.WriteLine($"{UI.BorderBottom}");
-                PromptContinue();
-            }
-            else
-            {
-                foreach (var order in response.Order)
-                {
-                    Console.WriteLine($"{UI.HR}");
-                    Console.WriteLine($"{UI.RowPrefix}{order.OrderNumber} {order.OrderDate}");
-                    Console.WriteLine($"{UI.RowPrefix}{order.CustomerName}");
-                    Console.WriteLine($"{UI.RowPrefix}{order.State}");
-                    Console.WriteLine($"{UI.RowPrefix}Product: {order.ProductType}");
-                    Console.WriteLine($"{UI.RowPrefix}Materials: {order.MaterialCost}");
-                    Console.WriteLine($"{UI.RowPrefix}Labor: {order.LaborCost}");
-                    Console.WriteLine($"{UI.RowPrefix}Tax: {order.Tax}");
-                    Console.WriteLine($"{UI.RowPrefix}Total: {order.Total}");
-                    Console.WriteLine($"{UI.BorderBottom}");
-                }
-                PromptContinue();
             }
         }
 
-        public static OrderAddResponse DisplayAddOrder(OrderAddResponse orderAddResponse)
+        public static void DisplayProducts(List<Product> products)
         {
-            OrderManager manager = OrderManagerFactory.Create();
-            Validation validate = new Validation();
             Console.Clear();
-            Console.WriteLine($"{UI.BorderTop}");
+            Console.WriteLine("{0, -15} {1, -15} {2}",
+                "Product Type", "Cost Per SqFoot", "Labor Cost Per SqFoot");
 
-            if (orderAddResponse.Success == false)
+            foreach (var product in products)
             {
-                Console.WriteLine($"{UI.RowPrefix}{orderAddResponse.Message}");
-                Console.WriteLine($"{UI.BorderBottom}");
-                PromptContinue();
+                Console.WriteLine("{0, -15} {1, -15} {2}",
+                    product.ProductType, product.CostPerSquareFoot, product.LaborCostPerSquareFoot);
             }
-            else
-            {
-                while (true)
-                {
-                    Console.Clear();
-                    Console.Write("Customer Name: ");
-                    string custName = Console.ReadLine();
-                    ValidationResponse validationResponse = validate.CustomerName(custName);
-                    if (validationResponse.Success == false)
-                    {
-                        Console.WriteLine(validationResponse.Message);
-                        PromptContinue();
-                    }
-                    else
-                    {
-                        orderAddResponse.Order.CustomerName = custName;
-                        break;
-                    }
-                }
-                while (true)
-                {
-                    Console.Clear();
-                    Console.WriteLine($"Customer Name: {orderAddResponse.Order.CustomerName}");
-                    Console.Write("State: ");
-                    string state = Console.ReadLine();
-                    orderAddResponse = manager.StateOnFile(state, orderAddResponse);
-                    if (orderAddResponse.Success == false)
-                    {
-                        Console.WriteLine(orderAddResponse.Message);
-                        PromptContinue();
-                    }
-                    else
-                    {
-                        orderAddResponse.Order.State = state.Substring(0, 1).ToUpper() + state.Substring(1).ToLower();
-                    }
-                }
-            }
-            return orderAddResponse;
         }
 
-        public static void DisplayOrderDateRequest()
+        public static void DisplayAddOrderSummary(Order order)
         {
-
-            Console.Clear();
-            Console.WriteLine($"{UI.BorderTop}");
-            Console.WriteLine($"{UI.RowPrefix}LOOKUP ORDER");
+            DisplayHeader("ADD ORDER");
+            Console.WriteLine($"{UI.RowPrefix}Customer Name: {order.CustomerName}");
+            Console.WriteLine($"{UI.RowPrefix}State: {order.State}");
+            Console.WriteLine($"{UI.RowPrefix}Product: {order.ProductType}");
+            Console.WriteLine($"{UI.RowPrefix}Material: {order.MaterialCost}");
+            Console.WriteLine($"{UI.RowPrefix}Labor: {order.LaborCost}");
+            Console.WriteLine($"{UI.RowPrefix}Tax: {order.Tax}");
+            Console.WriteLine($"{UI.RowPrefix}Total: {order.Total}");
             Console.WriteLine($"{UI.BorderBottom}");
-            Console.Write($"\nEnter Order Date (DDMMYYYY): ");
         }
 
+        public static bool ConfirmOrder()
+        {
+            while (true)
+            {
+                Console.WriteLine("Confirm order (y/n)?: ");
+                string answer = Console.ReadLine();
+                switch (answer.ToUpper())
+                {
+                    case "Y":
+                        return true;
+                    case "N":
+                        return false;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        public static string RequestOrderDate()
+        {
+            DisplayHeader("ORDER LOOKUP");
+            Console.Write($"\nEnter Order Date (DDMMYYYY): ");
+            return Console.ReadLine();
+        }
+
+        public static string RequestCustomerName()
+        {
+            DisplayHeader("ADD ORDER");
+            Console.Write($"\nEnter Customer Name: ");
+            return Console.ReadLine();
+        }
+
+        public static string RequestState()
+        {
+            DisplayHeader("ADD ORDER");
+            Console.Write($"\nEnter State: ");
+            return Console.ReadLine();
+        }
+
+        public static string RequestProduct()
+        {
+            Console.Write($"\nEnter Product: ");
+            return Console.ReadLine();
+        }
+
+        public static string RequestArea()
+        {
+            DisplayHeader("ADD ORDER");
+            Console.Write($"Area: ");
+            return Console.ReadLine();
+        }
+
+        public static void DisplayHeader(string header)
+        {
+            Console.Clear();
+            Console.WriteLine($"{UI.BorderTop}");
+            Console.WriteLine($"{UI.RowPrefix}{header}");
+            Console.WriteLine($"{UI.BorderBottom}");
+        }
+
+        public static void DisplayMessage(string message)
+        {
+            Console.Clear();
+            Console.WriteLine($"{UI.BorderTop}");
+            Console.WriteLine($"{message}");
+        }
         public static void PromptContinue()
         {
             Console.WriteLine("Press enter to continue...");

@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IProductRepository.cs" />
+    <Compile Include="Interfaces\IProductsRepository.cs" />
     <Compile Include="Interfaces\ITaxRepository.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Interfaces\IOrdersRepository.cs" />
@@ -52,6 +52,7 @@
     <Compile Include="Responses\OrderAddResponse.cs" />
     <Compile Include="Responses\OrderEditResponse.cs" />
     <Compile Include="Responses\OrderLookupResponse.cs" />
+    <Compile Include="Responses\OrderRemoveResponse.cs" />
     <Compile Include="Responses\Response.cs" />
     <Compile Include="Responses\ValidationResponse.cs" />
     <Compile Include="Tax.cs" />

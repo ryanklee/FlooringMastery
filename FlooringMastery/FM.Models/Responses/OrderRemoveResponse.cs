@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FM.Models.Interfaces
+namespace FM.Models.Responses
 {
-    public interface IProductRepository
+    public class OrderRemoveResponse : Response
     {
-        List<Product> LoadProducts();
     }
 }

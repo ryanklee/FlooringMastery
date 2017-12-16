@@ -45,8 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\OrderManager.cs" />
+    <Compile Include="Controllers\ProductManager.cs" />
     <Compile Include="Controllers\TaxManager.cs" />
     <Compile Include="Factories\OrderManagerFactory.cs" />
+    <Compile Include="Factories\ProductManagerFactory.cs" />
     <Compile Include="Factories\TaxManagerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation.cs" />

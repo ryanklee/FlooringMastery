@@ -1,5 +1,6 @@
 ﻿using FM.Models;
 using FM.Models.Interfaces;
+using FM.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,9 @@ namespace FM.Data.Repositories.Test
             new Tax { StateAbbreviation = "MI", StateName = "Michigan", TaxRate = 6.75M}
         };
 
-        public bool StateExists(string state)
+        public List<Tax> LoadTaxes()
         {
-            return _taxes.Exists(entry => entry.StateName == state);
+            return _taxes;
         }
     }
 }

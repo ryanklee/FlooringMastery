@@ -15,10 +15,11 @@ namespace FM.UI.Workflows
         public void Execute()
         {
             OrderManager manager = OrderManagerFactory.Create();
-            ConsoleIO.DisplayOrderDateRequest();
-            string orderDate = Console.ReadLine();
+            string orderDate = ConsoleIO.RequestOrderDate();
             OrderLookupResponse response = manager.LookupOrder(orderDate);
-            ConsoleIO.DisplayOrder(response);
+            if (response.Success == true) ConsoleIO.DisplayOrder(response);
+            else ConsoleIO.DisplayMessage(response.Message);
+            ConsoleIO.PromptContinue();
         }
     }
 }

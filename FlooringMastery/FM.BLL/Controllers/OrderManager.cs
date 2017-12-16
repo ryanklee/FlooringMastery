@@ -37,27 +37,36 @@ namespace FM.BLL.Controllers
             return response;
         }
 
-        public OrderAddResponse AddOrder(string orderDate)
+        public void AddOrder(Order order)
         {
-            Validation validate = new Validation();
-            OrderAddResponse response = new OrderAddResponse
-            {
-                Order = new Order(),
-            };
 
-            Response validationResponse = validate.OrderDateIsInFuture(orderDate);
+            _ordersRepository.SaveOrder(order);
 
-            if (validationResponse.Success == false)
-            {
-                response.Success = false;
-                response.Message = validationResponse.Message;
-                return response;
-            }
-            else
-            {
-                response.Success = true;
-                return response;
-            }
+        }
+
+        public OrderAddResponse CalculateNonInputOrderFields(OrderAddResponse orderAddResponse)
+        {
+
+            //        MaterialCost = (Area * CostPerSquareFoot)
+            //        LaborCost = (Area * LaborCostPerSquareFoot)
+            //        Tax = ((MaterialCost + LaborCost) * (TaxRate / 100))
+            //        Tax rates are stored as whole numbers
+            //        Total = (MaterialCost + LaborCost + Tax)
+
+            orderAddResponse.Order.MaterialCost = orderAddResponse.Order.Area * 
+                orderAddResponse.Order.CostPerSquareFoot;
+
+            orderAddResponse.Order.LaborCost = orderAddResponse.Order.Area * 
+                orderAddResponse.Order.LaborCostPerSquareFoot;
+
+            orderAddResponse.Order.Tax = ((orderAddResponse.Order.MaterialCost + 
+                orderAddResponse.Order.LaborCost) * 
+                (orderAddResponse.Order.TaxRate / 100));
+
+            orderAddResponse.Order.Total = orderAddResponse.Order.MaterialCost + 
+                orderAddResponse.Order.LaborCost +
+                orderAddResponse.Order.Tax;
+            return orderAddResponse;
         }
     }
 }

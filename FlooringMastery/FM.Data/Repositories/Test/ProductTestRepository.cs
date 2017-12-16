@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FM.Data.Repositories.Test
 {
-    public class ProductTestRepository : IProductRepository
+    public class ProductTestRepository : IProductsRepository
     {
         private static List<Product> _products = new List<Product>();
 
@@ -46,6 +46,5 @@ namespace FM.Data.Repositories.Test
             }
             return _products;
         }
-
     }
 }

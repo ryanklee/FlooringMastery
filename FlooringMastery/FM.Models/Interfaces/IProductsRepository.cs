@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FM.Models.Interfaces
 {
-    public interface ITaxRepository
+    public interface IProductsRepository
     {
-        List<Tax> LoadTaxes();
+        List<Product> LoadProducts();
     }
 }
