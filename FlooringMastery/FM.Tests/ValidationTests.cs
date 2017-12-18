@@ -27,7 +27,7 @@ namespace FM.Tests
         [TestCase("Acme", true)]
         [TestCase("Acme Brand", true)]
         [TestCase("Acme, LLC", true)]
-        [TestCase("Acme, INC.", true)]
+        [TestCase("Acme INC.", true)]
         [TestCase("Acme1000", true)]
         [TestCase("", false)]
         [TestCase("Acme!", false)]
@@ -49,6 +49,17 @@ namespace FM.Tests
         {
             Validation validate = new Validation();
             ValidationResponse response = validate.Area(area);
+            Assert.AreEqual(expectedResult, response.Success);
+        }
+        
+        [Test]
+        [TestCase("not a number", false)]
+        [TestCase("0", true)]
+        [TestCase("0.5", false)]
+        public void BadOrderNumberInputFails(string orderNumber, bool expectedResult)
+        {
+            Validation validate = new Validation();
+            ValidationResponse response = validate.OrderNumber(orderNumber);
             Assert.AreEqual(expectedResult, response.Success);
         }
     }

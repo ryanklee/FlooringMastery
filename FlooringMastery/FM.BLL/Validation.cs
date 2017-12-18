@@ -85,5 +85,20 @@ namespace FM.BLL
             response.Message = $"{area} not a valid number.";
             return response;
         }
+
+        public ValidationResponse OrderNumber(string orderNumber)
+        {
+            ValidationResponse response = new ValidationResponse();
+
+            if (Int32.TryParse(orderNumber, out int parsedOrderNumber))
+            {
+                response.Success = true;
+                return response;
+            }
+
+            response.Success = false;
+            response.Message = $"{orderNumber} not a valid number.";
+            return response;
+        }
     }
 }

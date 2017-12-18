@@ -16,7 +16,7 @@ namespace FM.UI.Workflows
     {
         public void Execute()
         {
-            OrderManager orderManger = OrderManagerFactory.Create();
+            OrderManager orderManager = OrderManagerFactory.Create();
             TaxManager taxManager = TaxManagerFactory.Create();
             ProductManager productManager = ProductManagerFactory.Create();
 
@@ -112,11 +112,11 @@ namespace FM.UI.Workflows
                 }
             }
             orderAddResponse = productManager.PopulateAddOrderProductFields(orderAddResponse);
-            orderAddResponse = orderManger.CalculateNonInputOrderFields(orderAddResponse);
+            orderAddResponse = orderManager.CalculateNonInputOrderFields(orderAddResponse);
             ConsoleIO.DisplayAddOrderSummary(orderAddResponse.Order);
             if (ConsoleIO.ConfirmOrder())
             {
-                orderManger.AddOrder(orderAddResponse.Order);
+                orderManager.AddOrder(orderAddResponse.Order);
             }
         }
     }

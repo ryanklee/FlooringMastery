@@ -17,8 +17,14 @@ namespace FM.UI.Workflows
             OrderManager manager = OrderManagerFactory.Create();
             string orderDate = ConsoleIO.RequestOrderDate();
             OrderLookupResponse response = manager.LookupOrder(orderDate);
-            if (response.Success == true) ConsoleIO.DisplayOrder(response);
-            else ConsoleIO.DisplayMessage(response.Message);
+            if (response.Success == true)
+            {
+                ConsoleIO.DisplayOrder(response);
+            }
+            else
+            {
+                ConsoleIO.DisplayMessage(response.Message);
+            }
             ConsoleIO.PromptContinue();
         }
     }

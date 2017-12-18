@@ -34,9 +34,9 @@ namespace FM.Data.Repositories.Test
             return _orderBatch.Where(order => order.OrderDate == orderDate);
         }
 
-        public IEnumerable<Order> LoadOrder(string orderDate, int orderNumber)
+        public Order LoadOrder(string orderDate, int orderNumber)
         {
-            return _orderBatch.Where(order => order.OrderDate == orderDate && order.OrderNumber == orderNumber);
+            return _orderBatch.Where(order => order.OrderDate == orderDate && order.OrderNumber == orderNumber).First();
         }
 
         public void SaveOrder(Order order)

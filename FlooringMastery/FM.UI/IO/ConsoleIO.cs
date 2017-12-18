@@ -16,8 +16,7 @@ namespace FM.UI.IO
 
         public static void DisplayMenu()
         {
-            Console.Clear();
-            Console.WriteLine($"{UI.BorderTop}");
+            DisplayHeader();
             Console.WriteLine($"{UI.RowPrefix}FLOORING PROGRAM");
             Console.WriteLine($"{UI.RowPrefix}");
             Console.WriteLine($"{UI.RowPrefix}1. Diplay Orders");
@@ -33,9 +32,7 @@ namespace FM.UI.IO
 
         public static void DisplayOrder(OrderLookupResponse response)
         {
-            Console.Clear();
-            DisplayHeader("ORDER LOOKUP");
-
+            DisplayHeader();
             foreach (var order in response.Order)
             {
                 Console.WriteLine($"{UI.HR}");
@@ -53,7 +50,7 @@ namespace FM.UI.IO
 
         public static void DisplayProducts(List<Product> products)
         {
-            Console.Clear();
+            DisplayHeader();
             Console.WriteLine("{0, -15} {1, -15} {2}",
                 "Product Type", "Cost Per SqFoot", "Labor Cost Per SqFoot");
 
@@ -66,7 +63,7 @@ namespace FM.UI.IO
 
         public static void DisplayAddOrderSummary(Order order)
         {
-            DisplayHeader("ADD ORDER");
+            DisplayHeader();
             Console.WriteLine($"{UI.RowPrefix}Customer Name: {order.CustomerName}");
             Console.WriteLine($"{UI.RowPrefix}State: {order.State}");
             Console.WriteLine($"{UI.RowPrefix}Product: {order.ProductType}");
@@ -97,51 +94,56 @@ namespace FM.UI.IO
 
         public static string RequestOrderDate()
         {
-            DisplayHeader("ORDER LOOKUP");
+            DisplayHeader();
             Console.Write($"\nEnter Order Date (DDMMYYYY): ");
+            return Console.ReadLine();
+        }
+
+        public static string RequestOrderNumber()
+        {
+            DisplayHeader();
+            Console.Write($"\nEnter Order Number: ");
             return Console.ReadLine();
         }
 
         public static string RequestCustomerName()
         {
-            DisplayHeader("ADD ORDER");
+            DisplayHeader();
             Console.Write($"\nEnter Customer Name: ");
             return Console.ReadLine();
         }
 
         public static string RequestState()
         {
-            DisplayHeader("ADD ORDER");
+            DisplayHeader();
             Console.Write($"\nEnter State: ");
             return Console.ReadLine();
         }
 
         public static string RequestProduct()
         {
+            DisplayHeader();
             Console.Write($"\nEnter Product: ");
             return Console.ReadLine();
         }
 
         public static string RequestArea()
         {
-            DisplayHeader("ADD ORDER");
+            DisplayHeader();
             Console.Write($"Area: ");
             return Console.ReadLine();
         }
 
-        public static void DisplayHeader(string header)
-        {
-            Console.Clear();
-            Console.WriteLine($"{UI.BorderTop}");
-            Console.WriteLine($"{UI.RowPrefix}{header}");
-            Console.WriteLine($"{UI.BorderBottom}");
-        }
-
         public static void DisplayMessage(string message)
         {
+            DisplayHeader();
+            Console.WriteLine($"{message}");
+        }
+
+        public static void DisplayHeader()
+        {
             Console.Clear();
             Console.WriteLine($"{UI.BorderTop}");
-            Console.WriteLine($"{message}");
         }
         public static void PromptContinue()
         {

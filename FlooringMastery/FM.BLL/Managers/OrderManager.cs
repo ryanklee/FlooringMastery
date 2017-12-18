@@ -37,6 +37,25 @@ namespace FM.BLL.Managers
             return response;
         }
 
+        public OrderEditResponse LookupOrder(string orderDate, int orderNumber)
+        {
+            OrderEditResponse response = new OrderEditResponse
+            {
+                Order = _ordersRepository.LoadOrder(orderDate, orderNumber)
+            };
+
+            if (!response.Order.Any())
+            {
+                response.Success = false;
+                response.Message = $"No order for { orderDate } exists.";
+            }
+            else
+            {
+                response.Success = true;
+            }
+            return response;
+        }
+
         public void AddOrder(Order order)
         {
 
