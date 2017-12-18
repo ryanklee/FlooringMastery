@@ -19,7 +19,7 @@ namespace FM.Tests
         {
             OrderManager manager = OrderManagerFactory.Create();
 
-            OrderLookupResponse response = manager.LookupOrder("06012013");
+            OrderBatchResponse response = manager.LookupOrder("06012013");
 
             Assert.IsNotNull(response.Order);
             Assert.IsTrue(response.Success);
@@ -31,7 +31,7 @@ namespace FM.Tests
         {
             OrderManager manager = OrderManagerFactory.Create();
 
-            OrderLookupResponse response = manager.LookupOrder("00000000");
+            OrderBatchResponse response = manager.LookupOrder("00000000");
 
             Assert.IsFalse(response.Order.Any());
             Assert.IsFalse(response.Success);

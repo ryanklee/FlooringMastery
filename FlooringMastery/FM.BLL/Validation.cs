@@ -1,4 +1,7 @@
-﻿using FM.Models.Responses;
+﻿using FM.BLL.Factories;
+using FM.BLL.Managers;
+using FM.Models;
+using FM.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -98,6 +101,39 @@ namespace FM.BLL
 
             response.Success = false;
             response.Message = $"{orderNumber} not a valid number.";
+            return response;
+        }
+
+        public ValidationResponse StateExists(string state)
+        {
+            ValidationResponse response = new ValidationResponse();
+            TaxManager manager = TaxManagerFactory.Create();
+
+            if (!manager.StateExists(state))
+            {
+                response.Success = false;
+                response.Message = $"{state} does not exist.";
+                return response;
+            }
+
+            response.Success = true;
+            return response;
+        }
+
+        public ValidationResponse ProductExists(string product)
+        {
+            ValidationResponse response = new ValidationResponse();
+            ProductManager manager = ProductManagerFactory.Create();
+
+            List<Product> products = manager.GetProducts();
+
+            if (!products.Exists(entry => entry.ProductType.ToUpper() == product.ToUpper()))
+            {
+                response.Success = false;
+                response.Message = $"{product} does not exist.";
+                return response;
+            }
+            response.Success = true;
             return response;
         }
     }

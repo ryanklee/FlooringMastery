@@ -16,17 +16,32 @@ namespace FM.UI.Workflows
     {
         public void Execute()
         {
-            OrderManager orderManager = OrderManagerFactory.Create();
-            TaxManager taxManager = TaxManagerFactory.Create();
-            ProductManager productManager = ProductManagerFactory.Create();
-
-            List<Product> products = productManager.GetProducts();
-            Validation validate = new Validation();
-
-            OrderAddResponse orderAddResponse = new OrderAddResponse
+            OrderSingleResponse response = new OrderSingleResponse
             {
                 Order = new Order()
             };
+
+            OrderManager orderManager = OrderManagerFactory.Create();
+
+            response.Order.OrderDate = RequestOrderDate(response.Order);
+            response.Order.CustomerName = RequestCustomerName(response.Order);
+            response.Order.State = RequestState(response.Order);
+            response.Order.ProductType = RequestProduct(response.Order);
+            response.Order.Area = RequestArea(response.Order);
+            
+            response.Order = orderManager.PopulateOrderProductFields(response.Order);
+            response.Order = orderManager.CalculateNonInputOrderFields(response.Order);
+
+            ConsoleIO.DisplayAddOrderSummary(response.Order);
+            if (ConsoleIO.ConfirmOrder())
+            {
+                orderManager.AddOrder(response.Order);
+            }
+        }
+
+        private string RequestOrderDate(Order order)
+        {
+            Validation validate = new Validation();
 
             while (true)
             {
@@ -39,12 +54,14 @@ namespace FM.UI.Workflows
                 }
                 else
                 {
-                    orderAddResponse.Order.OrderDate = orderDate;
                     ConsoleIO.PromptContinue();
-                    break;
+                    return orderDate;
                 }
             }
-
+        }
+        private string RequestCustomerName(Order order)
+        {
+            Validation validate = new Validation();
             while (true)
             {
                 string custName = ConsoleIO.RequestCustomerName();
@@ -56,44 +73,58 @@ namespace FM.UI.Workflows
                 }
                 else
                 {
-                    orderAddResponse.Order.CustomerName = custName;
                     ConsoleIO.PromptContinue();
-                    break;
+                    return custName;
                 }
             }
-
+        }
+        private string RequestState(Order order)
+        {
+            Validation validate = new Validation();
             while (true)
             {
                 string state = ConsoleIO.RequestState();
-                orderAddResponse = taxManager.CheckState(state, orderAddResponse);
-                if (orderAddResponse.Success == false)
+                ValidationResponse validationResponse = validate.StateExists(state);
+
+                if (validationResponse.Success == false)
                 {
-                    ConsoleIO.DisplayMessage(orderAddResponse.Message);
+                    ConsoleIO.DisplayMessage(validationResponse.Message);
                     ConsoleIO.PromptContinue();
                 }
                 else
                 {
                     ConsoleIO.PromptContinue();
-                    break;
+                    return state;
                 }
             }
+        }
+        private string RequestProduct(Order order)
+        {
+            Validation validate = new Validation();
+            ProductManager productManager = ProductManagerFactory.Create();
+            List<Product> products = productManager.GetProducts();
 
             while (true)
             {
                 ConsoleIO.DisplayProducts(products);
                 string product = ConsoleIO.RequestProduct();
-                orderAddResponse = productManager.CheckProduct(product, orderAddResponse);
-                if (orderAddResponse.Success == false)
+                ValidationResponse validationResponse = validate.ProductExists(product);
+
+                if (validationResponse.Success == false)
                 {
-                    ConsoleIO.DisplayMessage(orderAddResponse.Message);
+                    ConsoleIO.DisplayMessage(validationResponse.Message);
                     ConsoleIO.PromptContinue();
                 }
                 else
                 {
                     ConsoleIO.PromptContinue();
-                    break;
+                    return product;
                 }
             }
+        }
+        private decimal RequestArea(Order order)
+        {
+            Validation validate = new Validation();
 
             while (true)
             {
@@ -106,17 +137,9 @@ namespace FM.UI.Workflows
                 }
                 else
                 {
-                    orderAddResponse.Order.Area = Decimal.Parse(area);
                     ConsoleIO.PromptContinue();
-                    break;
+                    return Decimal.Parse(area);
                 }
-            }
-            orderAddResponse = productManager.PopulateAddOrderProductFields(orderAddResponse);
-            orderAddResponse = orderManager.CalculateNonInputOrderFields(orderAddResponse);
-            ConsoleIO.DisplayAddOrderSummary(orderAddResponse.Order);
-            if (ConsoleIO.ConfirmOrder())
-            {
-                orderManager.AddOrder(orderAddResponse.Order);
             }
         }
     }

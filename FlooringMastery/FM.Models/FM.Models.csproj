@@ -52,10 +52,8 @@
     <Compile Include="Interfaces\IOrdersRepository.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Responses\OrderAddResponse.cs" />
-    <Compile Include="Responses\OrderEditResponse.cs" />
-    <Compile Include="Responses\OrderLookupResponse.cs" />
-    <Compile Include="Responses\OrderRemoveResponse.cs" />
+    <Compile Include="Responses\OrderBatchResponse.cs" />
+    <Compile Include="Responses\OrderSingleResponse.cs" />
     <Compile Include="Responses\Response.cs" />
     <Compile Include="Responses\ValidationResponse.cs" />
     <Compile Include="Tax.cs" />

@@ -1,7 +1,4 @@
-﻿using FM.BLL;
-using FM.Models;
-using FM.UI;
-using FM.UI.IO;
+﻿using FM.UI.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +26,13 @@ namespace FM.UI.Workflows
                         addOrder.Execute();
                         break;
                     case "3":
-                        throw new NotImplementedException();
+                        EditOrder editOrder = new EditOrder();
+                        editOrder.Execute();
+                        break;
+                    case "4":
+                        RemoveOrder removeOrder = new RemoveOrder();
+                        removeOrder.Execute();
+                        break;
                     case "5":
                         return;
                     default:

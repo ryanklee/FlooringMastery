@@ -1,4 +1,5 @@
-﻿using FM.Models;
+﻿using FM.BLL.Factories;
+using FM.Models;
 using FM.Models.Interfaces;
 using FM.Models.Responses;
 using System;
@@ -18,11 +19,32 @@ namespace FM.BLL.Managers
             _ordersRepository = ordersRepository;
         }
 
-        public OrderLookupResponse LookupOrder(string orderDate)
+        public List<Order> LoadOrderBatch(string orderDate)
         {
-            OrderLookupResponse response = new OrderLookupResponse
+            return _ordersRepository.LoadOrders(orderDate);
+        }
+
+        public Order LoadSingleOrder(string orderDate, int orderNumber)
+        {
+
+            List<Order> orderBatch = LoadOrderBatch(orderDate);
+            bool orderExists = orderBatch.Exists(order => order.OrderDate == orderDate &&
+                                     order.OrderNumber == orderNumber);
+            if (orderExists)
             {
-                Order = _ordersRepository.LoadOrder(orderDate)
+                Order singleOrder = LoadOrderBatch(orderDate).Where(order => order.OrderDate == orderDate &&
+                                         order.OrderNumber == orderNumber).First();
+                return singleOrder;
+            }
+
+            return null;
+        }
+
+        public OrderBatchResponse LookupOrder(string orderDate)
+        {
+            OrderBatchResponse response = new OrderBatchResponse
+            {
+                Order = LoadOrderBatch(orderDate)
             };
 
             if (!response.Order.Any())
@@ -37,17 +59,17 @@ namespace FM.BLL.Managers
             return response;
         }
 
-        public OrderEditResponse LookupOrder(string orderDate, int orderNumber)
+        public OrderSingleResponse LookupOrder(string orderDate, int orderNumber)
         {
-            OrderEditResponse response = new OrderEditResponse
+            OrderSingleResponse response = new OrderSingleResponse
             {
-                Order = _ordersRepository.LoadOrder(orderDate, orderNumber)
+                Order = LoadSingleOrder(orderDate, orderNumber)
             };
 
-            if (!response.Order.Any())
+            if (response.Order == null)
             {
                 response.Success = false;
-                response.Message = $"No order for { orderDate } exists.";
+                response.Message = $"No order for { orderDate } { orderNumber } exists.";
             }
             else
             {
@@ -58,34 +80,46 @@ namespace FM.BLL.Managers
 
         public void AddOrder(Order order)
         {
-
             _ordersRepository.SaveOrder(order);
-
         }
 
-        public OrderAddResponse CalculateNonInputOrderFields(OrderAddResponse orderAddResponse)
+        public void DeleteOrder(Order order)
         {
-
-            //        MaterialCost = (Area * CostPerSquareFoot)
-            //        LaborCost = (Area * LaborCostPerSquareFoot)
-            //        Tax = ((MaterialCost + LaborCost) * (TaxRate / 100))
-            //        Tax rates are stored as whole numbers
-            //        Total = (MaterialCost + LaborCost + Tax)
-
-            orderAddResponse.Order.MaterialCost = orderAddResponse.Order.Area * 
-                orderAddResponse.Order.CostPerSquareFoot;
-
-            orderAddResponse.Order.LaborCost = orderAddResponse.Order.Area * 
-                orderAddResponse.Order.LaborCostPerSquareFoot;
-
-            orderAddResponse.Order.Tax = ((orderAddResponse.Order.MaterialCost + 
-                orderAddResponse.Order.LaborCost) * 
-                (orderAddResponse.Order.TaxRate / 100));
-
-            orderAddResponse.Order.Total = orderAddResponse.Order.MaterialCost + 
-                orderAddResponse.Order.LaborCost +
-                orderAddResponse.Order.Tax;
-            return orderAddResponse;
+            _ordersRepository.DeleteOrder(order);
         }
+
+        public Order PopulateOrderProductFields(Order order)
+        {
+            ProductManager productManager = ProductManagerFactory.Create();
+            TaxManager taxManager = TaxManagerFactory.Create();
+            List<Product> products = productManager.GetProducts();
+            order = taxManager.SetStateTaxRate(order);
+
+            foreach (var entry in productManager.GetProducts())
+            {
+                if (entry.ProductType.ToUpper() == order.ProductType.ToUpper())
+                {
+                    order.CostPerSquareFoot = entry.CostPerSquareFoot;
+                    order.LaborCostPerSquareFoot = entry.LaborCostPerSquareFoot;
+                }
+            }
+            return order;
+        }
+
+        public Order CalculateNonInputOrderFields(Order order)
+        {
+            order.MaterialCost = order.Area * order.CostPerSquareFoot;
+
+            order.LaborCost = order.Area * order.LaborCostPerSquareFoot;
+
+            order.Tax = ((order.MaterialCost + order.LaborCost) *
+                (order.TaxRate / 100));
+
+            order.Total = order.MaterialCost + order.LaborCost + order.Tax;
+
+            return order;
+        }
+
+
     }
 }

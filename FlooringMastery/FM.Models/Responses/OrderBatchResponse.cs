@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FM.Models.Responses
 {
-    public class OrderEditResponse : Response
+    public class OrderBatchResponse : Response
     {
-        public Order Order { get; set; }
+        public IEnumerable<Order> Order { get; set; }
     }
 }

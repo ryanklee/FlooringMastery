@@ -8,8 +8,8 @@ namespace FM.Models.Interfaces
 {
     public interface IOrdersRepository
     {
-        IEnumerable<Order> LoadOrder(string orderDate);
-        IEnumerable<Order> LoadOrder(string orderDate, int orderNumber);
+        List<Order> LoadOrders(string orderDate);
         void SaveOrder(Order order);
+        void DeleteOrder(Order order);
     }
 }

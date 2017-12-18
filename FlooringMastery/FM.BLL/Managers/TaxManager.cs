@@ -1,4 +1,5 @@
-﻿using FM.Models.Interfaces;
+﻿using FM.Models;
+using FM.Models.Interfaces;
 using FM.Models.Responses;
 using System;
 using System.Collections.Generic;
@@ -22,36 +23,16 @@ namespace FM.BLL.Managers
             return _taxRepository.LoadTaxes().Exists(entry => entry.StateName.ToUpper() == state.ToUpper());
         }
 
-        public OrderAddResponse GetStateTaxRate(string state, OrderAddResponse response)
+        public Order SetStateTaxRate(Order order)
         {
             foreach (var entry in _taxRepository.LoadTaxes())
             {
-                if (entry.StateName.ToUpper() == state.ToUpper())
+                if (entry.StateName.ToUpper() == order.State.ToUpper())
                 {
-                    response.Order.TaxRate = entry.TaxRate;
-                    return response;
+                    order.TaxRate = entry.TaxRate;
                 }
             }
-            response.Success = false;
-            response.Message = "No such state on file.";
-            return response;
-        }
-
-        public OrderAddResponse CheckState(string state, OrderAddResponse orderAddResponse)
-        {
-            if (StateExists(state) == false)
-            {
-                orderAddResponse.Success = false;
-                orderAddResponse.Message = ($"{state} does not exist on file.");
-                return orderAddResponse;
-            }
-            else
-            {
-                orderAddResponse.Success = true;
-                orderAddResponse.Order.State = state;
-                orderAddResponse = GetStateTaxRate(state, orderAddResponse);
-                return orderAddResponse;
-            }
+            return order;
         }
     }
 }

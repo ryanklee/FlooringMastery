@@ -29,14 +29,9 @@ namespace FM.Data.Repositories.Test
 
         private static List<Order> _orderBatch = new List<Order> { _order };
 
-        public IEnumerable<Order> LoadOrder(string orderDate)
+        public List<Order> LoadOrders(string orderDate)
         {
-            return _orderBatch.Where(order => order.OrderDate == orderDate);
-        }
-
-        public Order LoadOrder(string orderDate, int orderNumber)
-        {
-            return _orderBatch.Where(order => order.OrderDate == orderDate && order.OrderNumber == orderNumber).First();
+            return _orderBatch.Where(order => order.OrderDate == orderDate).ToList();
         }
 
         public void SaveOrder(Order order)
@@ -51,9 +46,23 @@ namespace FM.Data.Repositories.Test
                     order.OrderNumber = _orderBatch.Where(orderEntry => orderEntry.OrderDate == order.OrderDate).Max(orderEntry => orderEntry.OrderNumber) + 1;
                 }
                 //no? then make order number == 1
-                else order.OrderNumber++;
+                else
+                {
+                    order.OrderNumber++;
+                }
+                _orderBatch.Add(order);
             }
-            _orderBatch.Add(order);
+            else
+            {
+                int orderPosition = _orderBatch.FindIndex(orderEntry => orderEntry.OrderNumber == order.OrderNumber);
+                _orderBatch.RemoveAt(orderPosition);
+                _orderBatch.Insert(orderPosition, order);
+            }
+        }
+
+        public void DeleteOrder(Order order)
+        {
+            _orderBatch.Remove(order);
         }
     }
 }

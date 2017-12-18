@@ -16,28 +16,42 @@ namespace FM.UI.Workflows
     {
         public void Execute()
         {
-            OrderManager orderManager = OrderManagerFactory.Create();
-            TaxManager taxManager = TaxManagerFactory.Create();
+            OrderSingleResponse response = RetrieveOrder();
             ProductManager productManager = ProductManagerFactory.Create();
+            OrderManager orderManager = OrderManagerFactory.Create();
 
-            List<Product> products = productManager.GetProducts();
+            response.Order.CustomerName = EditCustomerName(response.Order.CustomerName);
+            response.Order.State = EditState(response.Order.State);
+            response.Order.ProductType = EditProduct(response.Order.ProductType);
+            response.Order.Area = EditArea(response.Order.Area);
+
+            response.Order = orderManager.PopulateOrderProductFields(response.Order);
+            response.Order = orderManager.CalculateNonInputOrderFields(response.Order);
+
+            ConsoleIO.DisplayAddOrderSummary(response.Order);
+            if (ConsoleIO.ConfirmOrder())
+            {
+                orderManager.AddOrder(response.Order);
+            }
+        }
+
+        private OrderSingleResponse RetrieveOrder()
+        {
+            OrderSingleResponse response = new OrderSingleResponse();
+            OrderManager orderManager = OrderManagerFactory.Create();
             Validation validate = new Validation();
 
             while (true)
             {
                 string orderDate = ConsoleIO.RequestOrderDate();
-                OrderEditResponse response = orderManager.LookupOrder(orderDate);
-
                 string orderNumber = ConsoleIO.RequestOrderNumber();
+
                 ValidationResponse validationResponse = validate.OrderNumber(orderNumber);
+                response = orderManager.LookupOrder(orderDate, Int32.Parse(orderNumber));
 
                 if (validationResponse.Success == false)
                 {
                     ConsoleIO.DisplayMessage(validationResponse.Message);
-                    ConsoleIO.PromptContinue();
-                }
-                else
-                {
                     ConsoleIO.PromptContinue();
                 }
 
@@ -50,6 +64,115 @@ namespace FM.UI.Workflows
                 {
                     ConsoleIO.PromptContinue();
                     break;
+                }
+            }
+            return response;
+        }
+        private string EditCustomerName(string oldCustomerName)
+        {
+            Validation validate = new Validation();
+
+            while (true)
+            {
+                string newCustomerName = ConsoleIO.EditCustomerName(oldCustomerName);
+
+                if (newCustomerName == "")
+                {
+                    return oldCustomerName;
+                }
+
+                ValidationResponse validationResponse = validate.CustomerName(newCustomerName);
+
+                if (validationResponse.Success == false)
+                {
+                    ConsoleIO.DisplayMessage(validationResponse.Message);
+                    ConsoleIO.PromptContinue();
+                }
+                else
+                {
+                    ConsoleIO.PromptContinue();
+                    return newCustomerName;
+                }
+            }
+        }
+        private string EditState(string oldState)
+        {
+            Validation validate = new Validation();
+
+            while (true)
+            {
+                string newState = ConsoleIO.EditState(oldState);
+
+                if (newState == "")
+                {
+                    return oldState;
+                }
+
+                ValidationResponse validationResponse = validate.StateExists(newState);
+
+                if (validationResponse.Success == false)
+                {
+                    ConsoleIO.DisplayMessage(validationResponse.Message);
+                    ConsoleIO.PromptContinue();
+                }
+                else
+                {
+                    ConsoleIO.PromptContinue();
+                    return newState;
+                }
+            }
+        }
+        private string EditProduct(string oldProduct)
+        {
+            Validation validate = new Validation();
+
+            while (true)
+            {
+                string newProduct = ConsoleIO.EditProductType(oldProduct);
+
+                if (newProduct == "")
+                {
+                    return oldProduct;
+                }
+
+                ValidationResponse validationResponse = validate.ProductExists(newProduct);
+
+                if (validationResponse.Success == false)
+                {
+                    ConsoleIO.DisplayMessage(validationResponse.Message);
+                    ConsoleIO.PromptContinue();
+                }
+                else
+                {
+                    ConsoleIO.PromptContinue();
+                    return newProduct;
+                }
+            }
+        }
+        private decimal EditArea(decimal oldArea)
+        {
+            Validation validate = new Validation();
+
+            while (true)
+            {
+                string newArea = ConsoleIO.EditArea(oldArea);
+
+                if (newArea == "")
+                {
+                    return oldArea;
+                }
+
+                ValidationResponse validationResponse = validate.Area(newArea);
+
+                if (validationResponse.Success == false)
+                {
+                    ConsoleIO.DisplayMessage(validationResponse.Message);
+                    ConsoleIO.PromptContinue();
+                }
+                else
+                {
+                    ConsoleIO.PromptContinue();
+                    oldArea = Decimal.Parse(newArea);
                 }
             }
         }

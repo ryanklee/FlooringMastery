@@ -13,7 +13,6 @@ namespace FM.UI.IO
 {
     public class ConsoleIO
     {
-
         public static void DisplayMenu()
         {
             DisplayHeader();
@@ -29,8 +28,7 @@ namespace FM.UI.IO
             Console.Write("Enter Choice: ");
         }
 
-
-        public static void DisplayOrder(OrderLookupResponse response)
+        public static void DisplayOrder(OrderBatchResponse response)
         {
             DisplayHeader();
             foreach (var order in response.Order)
@@ -122,7 +120,6 @@ namespace FM.UI.IO
 
         public static string RequestProduct()
         {
-            DisplayHeader();
             Console.Write($"\nEnter Product: ");
             return Console.ReadLine();
         }
@@ -131,6 +128,34 @@ namespace FM.UI.IO
         {
             DisplayHeader();
             Console.Write($"Area: ");
+            return Console.ReadLine();
+        }
+
+        public static string EditState(string state)
+        {
+            DisplayHeader();
+            Console.Write($"State ({state}): ");
+            return Console.ReadLine();
+        }
+
+        public static string EditProductType(string product)
+        {
+            DisplayHeader();
+            Console.Write($"Product ({product}): ");
+            return Console.ReadLine();
+        }
+
+        public static string EditArea(decimal area)
+        {
+            DisplayHeader();
+            Console.Write($"Area ({area}): ");
+            return Console.ReadLine();
+        }
+
+        public static string EditCustomerName(string customerName)
+        {
+            DisplayHeader();
+            Console.Write($"CustomerName ({customerName}): ");
             return Console.ReadLine();
         }
 
@@ -145,6 +170,7 @@ namespace FM.UI.IO
             Console.Clear();
             Console.WriteLine($"{UI.BorderTop}");
         }
+
         public static void PromptContinue()
         {
             Console.WriteLine("Press enter to continue...");

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FM.Models.Responses
 {
-    public class OrderRemoveResponse : Response
+    public class OrderSingleResponse : Response
     {
+        public Order Order { get; set; }
     }
 }
