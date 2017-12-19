@@ -14,6 +14,8 @@ namespace FM.UI.Workflows
 {
     public class EditOrder
     {
+        Validation validate = new Validation();
+
         public void Execute()
         {
             OrderSingleResponse response = RetrieveOrder();
@@ -39,7 +41,6 @@ namespace FM.UI.Workflows
         {
             OrderSingleResponse response = new OrderSingleResponse();
             OrderManager orderManager = OrderManagerFactory.Create();
-            Validation validate = new Validation();
 
             while (true)
             {
@@ -47,15 +48,17 @@ namespace FM.UI.Workflows
                 string orderNumber = ConsoleIO.RequestOrderNumber();
 
                 ValidationResponse validationResponse = validate.OrderNumber(orderNumber);
-                response = orderManager.LookupOrder(orderDate, Int32.Parse(orderNumber));
 
                 if (validationResponse.Success == false)
                 {
                     ConsoleIO.DisplayMessage(validationResponse.Message);
-                    ConsoleIO.PromptContinue();
+                }
+                else
+                {
+                    response = orderManager.LookupOrder(orderDate, Int32.Parse(orderNumber));
                 }
 
-                if (response.Success == false)
+                if (response.Success == false && response != null)
                 {
                     ConsoleIO.DisplayMessage(response.Message);
                     ConsoleIO.PromptContinue();
@@ -70,8 +73,6 @@ namespace FM.UI.Workflows
         }
         private string EditCustomerName(string oldCustomerName)
         {
-            Validation validate = new Validation();
-
             while (true)
             {
                 string newCustomerName = ConsoleIO.EditCustomerName(oldCustomerName);
@@ -97,8 +98,6 @@ namespace FM.UI.Workflows
         }
         private string EditState(string oldState)
         {
-            Validation validate = new Validation();
-
             while (true)
             {
                 string newState = ConsoleIO.EditState(oldState);
@@ -124,8 +123,6 @@ namespace FM.UI.Workflows
         }
         private string EditProduct(string oldProduct)
         {
-            Validation validate = new Validation();
-
             while (true)
             {
                 string newProduct = ConsoleIO.EditProductType(oldProduct);
@@ -151,7 +148,6 @@ namespace FM.UI.Workflows
         }
         private decimal EditArea(decimal oldArea)
         {
-            Validation validate = new Validation();
 
             while (true)
             {
@@ -172,7 +168,7 @@ namespace FM.UI.Workflows
                 else
                 {
                     ConsoleIO.PromptContinue();
-                    oldArea = Decimal.Parse(newArea);
+                    return Decimal.Parse(newArea);
                 }
             }
         }

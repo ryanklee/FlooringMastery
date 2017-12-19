@@ -47,7 +47,7 @@ namespace FM.BLL.Managers
                 Order = LoadOrderBatch(orderDate)
             };
 
-            if (!response.Order.Any())
+            if (response.Order == null || !response.Order.Any())
             {
                 response.Success = false;
                 response.Message = $"No order for { orderDate } exists.";

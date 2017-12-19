@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace FM.Tests
 {
     [TestFixture]
-    public class MockRepositoryTests
+    public class RepositoryTests
     {
         [Test]
         public void CanLoadOrderMockData()

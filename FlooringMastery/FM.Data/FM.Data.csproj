@@ -47,14 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Production\OrderProductionRepository.cs" />
+    <Compile Include="Repositories\Production\ProductProductionRepository.cs" />
+    <Compile Include="Repositories\Production\TaxProductionRepository.cs" />
     <Compile Include="Repositories\Test\ProductTestRepository.cs" />
     <Compile Include="Repositories\Test\TaxTestRepository.cs" />
     <Compile Include="Repositories\Test\OrderTestRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SampleData\Orders_06012013.txt" />
-    <Content Include="SampleData\Products.txt" />
-    <Content Include="SampleData\Taxes.txt" />
+    <Content Include="Repositories\Production\Data\Orders_06012013.txt" />
+    <Content Include="Repositories\Production\Data\Products.txt" />
+    <Content Include="Repositories\Production\Data\Taxes.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FM.Models\FM.Models.csproj">
@@ -62,9 +65,7 @@
       <Name>FM.Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\Production\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

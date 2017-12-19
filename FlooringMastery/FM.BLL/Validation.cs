@@ -72,7 +72,7 @@ namespace FM.BLL
 
             if (Decimal.TryParse(area, out decimal parsedArea))
             {
-                if (parsedArea > 0)
+                if (parsedArea >= 100)
                 {
                 response.Success = true;
                 return response;
@@ -80,7 +80,8 @@ namespace FM.BLL
                 else
                 {
                     response.Success = false;
-                    response.Message = "Area must be positive number";
+                    response.Message = "Minimum order is 100sq feet";
+                    return response;
                 }
             }
 

@@ -42,9 +42,9 @@ namespace FM.Tests
         [TestCase("not a number", false)]
         [TestCase("-5", false)]
         [TestCase("0", false)]
-        [TestCase("0.1", true)]
-        [TestCase("5", true)]
-        [TestCase("5.0", true)]
+        [TestCase("100", true)]
+        [TestCase("100.1", true)]
+        [TestCase("5.0", false)]
         public void BadAreaInputFails(string area, bool expectedResult)
         {
             Validation validate = new Validation();

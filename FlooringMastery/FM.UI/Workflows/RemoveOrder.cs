@@ -25,7 +25,6 @@ namespace FM.UI.Workflows
             }
         }
 
-
         private OrderSingleResponse RetrieveOrder()
         {
             OrderSingleResponse response = new OrderSingleResponse();
@@ -59,6 +58,5 @@ namespace FM.UI.Workflows
             }
             return response;
         }
-       
     }
 }

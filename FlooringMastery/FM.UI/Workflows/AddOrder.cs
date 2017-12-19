@@ -14,6 +14,9 @@ namespace FM.UI.Workflows
 {
     public class AddOrder
     {
+
+        Validation validate = new Validation();
+
         public void Execute()
         {
             OrderSingleResponse response = new OrderSingleResponse
@@ -41,8 +44,6 @@ namespace FM.UI.Workflows
 
         private string RequestOrderDate(Order order)
         {
-            Validation validate = new Validation();
-
             while (true)
             {
                 string orderDate = ConsoleIO.RequestOrderDate();
@@ -61,7 +62,6 @@ namespace FM.UI.Workflows
         }
         private string RequestCustomerName(Order order)
         {
-            Validation validate = new Validation();
             while (true)
             {
                 string custName = ConsoleIO.RequestCustomerName();
@@ -80,7 +80,6 @@ namespace FM.UI.Workflows
         }
         private string RequestState(Order order)
         {
-            Validation validate = new Validation();
             while (true)
             {
                 string state = ConsoleIO.RequestState();
@@ -100,7 +99,6 @@ namespace FM.UI.Workflows
         }
         private string RequestProduct(Order order)
         {
-            Validation validate = new Validation();
             ProductManager productManager = ProductManagerFactory.Create();
             List<Product> products = productManager.GetProducts();
 
@@ -124,7 +122,6 @@ namespace FM.UI.Workflows
         }
         private decimal RequestArea(Order order)
         {
-            Validation validate = new Validation();
 
             while (true)
             {

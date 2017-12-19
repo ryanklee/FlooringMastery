@@ -1,4 +1,5 @@
 ﻿using FM.BLL.Managers;
+using FM.Data.Repositories.Production;
 using FM.Data.Repositories.Test;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace FM.BLL.Factories
                 case "Test":
                     return new TaxManager(new TaxTestRepository());
                 case "Production":
-                    throw new NotImplementedException();
+                    return new TaxManager(new TaxProductionRepository());
                 default:
                     throw new Exception("Invalid mode value. Check app config.");
             }

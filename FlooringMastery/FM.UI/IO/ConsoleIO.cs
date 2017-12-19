@@ -65,6 +65,7 @@ namespace FM.UI.IO
             Console.WriteLine($"{UI.RowPrefix}Customer Name: {order.CustomerName}");
             Console.WriteLine($"{UI.RowPrefix}State: {order.State}");
             Console.WriteLine($"{UI.RowPrefix}Product: {order.ProductType}");
+            Console.WriteLine($"{UI.RowPrefix}Area: {order.Area}");
             Console.WriteLine($"{UI.RowPrefix}Material: {order.MaterialCost}");
             Console.WriteLine($"{UI.RowPrefix}Labor: {order.LaborCost}");
             Console.WriteLine($"{UI.RowPrefix}Tax: {order.Tax}");
